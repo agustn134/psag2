@@ -1,4 +1,3 @@
---Recuerda pedirle a chat que lo convierta a MySQL 8.0
 
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
