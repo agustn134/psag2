@@ -1,0 +1,161 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+</head>
+
+<body>
+    <div class="h-full bg-gray-200 p-8">
+        <div class="bg-white rounded-lg shadow-xl pb-8">
+            <div class="w-full h-[250px]">
+                <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg"
+                    class="w-full h-full rounded-tl-lg rounded-tr-lg">
+            </div>
+            <div *ngIf="user" class="flex flex-col items-center -mt-20">
+                <!-- <img src="{{ user.imagen_url }}" class="w-40 border-4 border-white rounded-full"> -->
+                <!-- Imagen de perfil -->
+                <img (click)="openImageModal()" src="{{ user.imagen_url }}"
+                    class="w-40 border-4 border-white rounded-full cursor-pointer">
+                <ng-template #defaultImage>
+                    <img class="h-8 w-8 rounded-full" src="https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png"
+                        alt="Imagen de usuario por defecto" />
+                </ng-template>
+                <!-- Modal para ver la imagen en grande -->
+                <div *ngIf="isImageModalOpen"
+                    class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-60">
+                    <div class="bg-white rounded-lg p-2 relative ">
+                        <button (click)="closeImageModal()" class="absolute top-2 right-2 text-gray-600">
+                            &times; <!-- Icono de cerrar -->
+                        </button>
+                        <img [src]="user.imagen_url" class="max-w-full max-h-screen rounded">
+                    </div>
+                </div>
+
+
+
+
+                <div class="flex items-center space-x-2 mt-2">
+                    <p class="text-2xl"> {{ user.nombre }} {{ user.ape_paterno }} </p>
+                    <span class="bg-blue-500 rounded-full p-1" title="Verified">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 h-2.5 w-2.5" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                    </span>
+                </div>
+                <p class="text-gray-700">{{ user.e_mail }}</p>
+                <p class="text-sm text-gray-500">{{ user.id_rol }} {{user.rol_nombre}} </p>
+            </div>
+            <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
+                <div class="flex items-center space-x-4 mt-2">
+                    <button (click)="toggleEdit()"
+                        class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                        <span *ngIf="!isEditing">Editar Perfil</span>
+                        <span *ngIf="isEditing">Cancel</span>
+
+                    </button>
+                    <!-- Botón para cambiar la imagen -->
+                    <button (click)="changeImage()" class="flex items-center bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                        Cambiar Imagen
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="user">
+            <div *ngIf="!isEditing && user"
+                class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
+                <div class="w-full flex flex-col 2xl:w-1/3">
+                    <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+                        <h4 class="text-xl text-gray-900 font-bold">Información Personal</h4>
+                        <ul class="mt-2 text-gray-700">
+                            <li class="flex border-y py-2">
+                                <span class="font-bold w-24">Nombre</span>
+                                <span class="text-gray-700">{{ user.nombre }}</span>
+                            </li>
+                            <li class="flex border-b py-2">
+                                <span class="font-bold w-24">Apellido Paterno:</span>
+                                <span class="text-gray-700">{{ user.ape_paterno }}</span>
+                            </li>
+                            <li class="flex border-b py-2">
+                                <span class="font-bold w-24">Apellido Materno:</span>
+                                <span class="text-gray-700">{{ user.ape_materno }}</span>
+                            </li>
+                            <li class="flex border-b py-2">
+                                <span class="font-bold w-24">Tel:</span>
+                                <span class="text-gray-700">{{ user.telefono }}</span>
+                            </li>
+                            <li class="flex border-b py-2">
+                                <span class="font-bold w-24">Email:</span>
+                                <span class="text-gray-700">{{ user.e_mail }}</span>
+                            </li>
+                            <li class="flex border-b py-2">
+                                <span class="font-bold w-24">Grupo:</span>
+                                <span class="text-gray-700">{{ user.grupo }}</span>
+                            </li>
+                            <li class="flex border-b py-2">
+                                <span class="font-bold w-24">Carrera:</span>
+                                <span class="text-gray-700">{{ user.id_carrera }} {{ user.nombre_carrera }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="isEditing && user " class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
+            <div class="w-full flex flex-col 2xl:w-1/3">
+                <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+                    <h4 class="text-xl text-gray-900 font-bold">Editar Información</h4>
+                    <form (ngSubmit)="saveChanges()">
+                        <div class="mt-2 text-gray-700">
+                            <label class="block">
+                                <span class="font-bold w-24">Nombre</span>
+                                <input [(ngModel)]="user.nombre" name="nombre"
+                                    class="mt-1 block w-full border-gray-300 rounded" required>
+                            </label>
+                            <label class="block mt-2">
+                                <span class="font-bold w-24">Apellido Paterno:</span>
+                                <input [(ngModel)]="user.ape_paterno" name="ape_paterno"
+                                    class="mt-1 block w-full border-gray-300 rounded" required>
+                            </label>
+                            <label class="block mt-2">
+
+                                <span class="font-bold w-24">Apellido Materno:</span>
+                                <input [(ngModel)]="user.ape_materno" name="ape_materno"
+                                    class="mt-1 block w-full border-gray-300 rounded">
+                            </label>
+                            <label class="block mt-2">
+                                <span class="font-bold w-24">Tel:</span>
+                                <input [(ngModel)]="user.telefono" name="telefono"
+                                    class="mt-1 block w-full border-gray-300 rounded">
+                            </label>
+                            <label class="block mt-2">
+                                <span class="font-bold w-24">Email:</span>
+                                <input [(ngModel)]="user.e_mail" name="e_mail"
+                                    class="mt-1 block w-full border-gray-300 rounded" required>
+                            </label>
+                            <label class="block mt-2">
+                                <span class="font-bold w-24">Grupo:</span>
+                                <input [(ngModel)]="user.grupo" name="grupo"
+                                    class="mt-1 block w-full border-gray-300 rounded">
+                            </label>
+                        </div>
+                        <button type="submit"
+                        class="flex items-center mt-2 bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">Guardar Cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col w-full 2xl:w-2/3">
+            <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+                <h4 class="text-xl text-gray-900 font-bold">About</h4>
+                <p class="mt-2 text-gray-700">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt
+                    voluptates
+                    obcaecati numquam error et ut fugiat asperiores...</p>
+            </div>
+        </div>
+    </div>
+</body>
