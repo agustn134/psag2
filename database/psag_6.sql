@@ -301,6 +301,10 @@ ALTER TABLE `tb_roles`
 ALTER TABLE `tb_usuarios`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
+---Agregar Campo de Imagen a los usuarios
+ALTER TABLE tb_usuarios
+ADD imagen_url VARCHAR(255) NULL;
+
 --
 -- Restricciones para tablas volcadas
 --
