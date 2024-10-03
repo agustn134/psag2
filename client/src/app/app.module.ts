@@ -89,7 +89,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AddProfilesComponent } from './components/add-profiles/add-profiles.component';
 import { LocationComponent } from './components/location/location.component';
 import { VisualInformationComponent } from './components/visual-information/visual-information.component';
-import { ContactComponent } from './components/contact/contact.component'; // Importa la clase
+import { ContactComponent } from './components/contact/contact.component';
+import { YtComponent } from './components/yt/yt.component'; // Importa la clase
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { ContactComponent } from './components/contact/contact.component'; // Im
     AddProfilesComponent,
     LocationComponent,
     VisualInformationComponent,
-    ContactComponent
+    ContactComponent,
+    YtComponent
   ],
   imports: [
     BrowserModule,
