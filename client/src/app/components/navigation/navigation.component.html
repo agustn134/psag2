@@ -45,6 +45,10 @@
               Agendar Cita
             </a>
 
+            <a *ngIf="isLoggedIn" routerLink="profile/add-profiles" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page">
+              Añadir Perfiles
+            </a>
+
             <a routerLink="/contact" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"  aria-current="page">
               Contacto
             </a>
@@ -89,7 +93,7 @@
               Perfil
             </a>
 
-            <a *ngIf="userRole === 'Alumno'" class="block px-4 py-2 text-sm text-gray-700" routerLink="profile/add-profiles" role="menuitem"   tabindex="-1" id="user-menu-item-0">
+            <a *ngIf=" isLoggedIn" class="block px-4 py-2 text-sm text-gray-700" routerLink="profile/add-profiles" role="menuitem"   tabindex="-1" id="user-menu-item-0">
               Añadir Perfiles
             </a>
 

@@ -101,8 +101,8 @@ export class NavigationComponent implements OnInit {
   isMenuOpen: boolean = false;
   isMenuOpenProfile: boolean = false;
   isLoggedIn: boolean = false;
-  errorMessage: string = ''; // Para almacenar mensajes de error
-  userRole: string | null = null; // Para almacenar el rol del usuario
+  errorMessage: string = '';
+
 
   user: User = {
     nombre: '',
@@ -121,8 +121,6 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
     this.authService.currentStatus.subscribe((status) => {this.isLoggedIn = status; });
-    this.getUserById(); // Llamar al método para obtener el usuario al cargar el componente
-    this.getUserIdRol(); // Llamar al método para obtener el rol del usuario
   }
 
   toggleMenu() {
@@ -138,34 +136,49 @@ export class NavigationComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  logOutId() {
+    this.authService.logOut();
+    this.router.navigate(['/login']);
+  }
+
   selectMenuItem() {
     this.isMenuOpen = false;
   }
 
-  getUserById(): void {
-    const userId = this.userService.getUserIdFromToken(); // Obtiene el ID del usuario desde el token
-    if (userId) {
-      this.userService.getUserById(userId).subscribe(
-        (data: User) => {
-          this.user = data;
-        },
-        (error) => {
-          console.error('Error al obtener los datos del usuario:', error);
-          this.errorMessage = 'No se pudieron obtener los datos del usuario.';
-        }
-      );
-    } else {
-      console.error('No se encontró el ID del usuario en el token.');
-      this.errorMessage = 'No se encontró el ID del usuario en el token.';
-    }
-  }
 
-  getUserIdRol(): void {
-    const userRole = this.userService.getUserIdRolFromToken(); // Obtiene el rol del usuario desde el token
-  }
+
+
+
 
 }
 
+
+
+    // this.getUserById(); // Llamar al método para obtener el usuario al cargar el componente
+
+
+  // getUserById(): void {
+  //   const userId = this.userService.getUserIdFromToken(); // Obtiene el ID del usuario desde el token
+  //   if (userId) {
+  //     this.userService.getUserById(userId).subscribe(
+  //       (data: User) => {
+  //         this.user = data;
+  //       },
+  //       (error) => {
+  //         console.error('Error al obtener los datos del usuario:', error);
+  //         this.errorMessage = 'No se pudieron obtener los datos del usuario.';
+  //       }
+  //     );
+  //   } else {
+  //     console.error('No se encontró el ID del usuario en el token.');
+  //     this.errorMessage = 'No se encontró el ID del usuario en el token.';
+  //   }
+  // }
+
+
+  // getUserIdRol(): void {
+  //   const userRole = this.userService.getUserIdRolFromToken(); // Obtiene el rol del usuario desde el token
+  // }
 
 
 

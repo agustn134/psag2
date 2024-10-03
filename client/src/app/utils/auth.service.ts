@@ -18,12 +18,21 @@ export class AuthService {
   logIn(token: string) {
     localStorage.setItem('token', token);
     this.loggedIn.next(true);
-
-
   }
 
   logOut() {
     localStorage.removeItem('token');
     this.loggedIn.next(false);
   }
+
+
 }
+
+
+
+
+
+
+
+
+

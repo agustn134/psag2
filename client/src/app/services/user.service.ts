@@ -63,42 +63,7 @@ export class UserService {
     }
   }
 
-  // Método para obtener el rol de usuario del token almacenado en localStorage y mostrarlo en la consola
-getUserIdRolFromToken(): string | null {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    console.log('Token no encontrado');
-    return null;
-  }
 
-  try {
-    const decodedToken = decode(token);
-    const userRole = decodedToken.payload['rol']; // Verifica si 'rol' es el campo correcto en tu payload
-
-    // Mapeo de roles
-    let roleName: string;
-    switch (userRole) {
-      case 1:
-        roleName = 'Alumno';
-        break;
-      case 2:
-        roleName = 'Psicólogo';
-        break;
-      case 3:
-        roleName = 'Administrador';
-        break;
-      default:
-        roleName = 'Desconocido';
-        break;
-    }
-
-    console.log('Rol de usuario:', roleName); // Muestra el rol (nombre) en la consola
-    return roleName;
-  } catch (error) {
-    console.error('Error al decodificar el token:', error);
-    return null;
-  }
-}
 
 }
 
@@ -115,22 +80,4 @@ getUserIdRolFromToken(): string | null {
 
 
 
-
-
-  // Método para obtener el rol de usuario del token almacenado en localStorage y mostrarlo en la consola
-  // getUserIdRolFromToken(): string | null {
-  //   const token = localStorage.getItem('token');
-  //   if (!token) {
-  //     console.log('Token no encontrado');
-  //     return null;
-  //   }try {
-  //     const decodedToken = decode(token);
-  //     const userRole = decodedToken.payload['rol']; // Verifica si 'rol' es el campo correcto en tu payload
-  //     console.log('Rol de usuario:', userRole); // Muestra el rol en la consola
-  //     return userRole;
-  //   } catch (error) {
-  //     console.error('Error al decodificar el token:', error);
-  //     return null;
-  //   }
-  // }
 
