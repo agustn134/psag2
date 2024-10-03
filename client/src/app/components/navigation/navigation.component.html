@@ -29,6 +29,10 @@
               Inicio
             </a>
 
+            <a *ngIf="isLoggedIn" routerLink="/home/dashboard" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page">
+              Inicio
+            </a>
+
             <a routerLink="/location" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page">
               Ubicación
             </a>
@@ -45,12 +49,12 @@
               Agendar Cita
             </a>
 
-            <a *ngIf="isLoggedIn" routerLink="profile/add-profiles" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page">
-              Añadir Perfiles
-            </a>
-
             <a routerLink="/contact" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"  aria-current="page">
               Contacto
+            </a>
+
+            <a *ngIf="isLoggedIn" routerLink="profile/add-profiles" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page">
+              Añadir Perfiles
             </a>
 
           </div>
