@@ -27,41 +27,6 @@ export class LoginComponent implements OnInit {
     // Se ejecuta al inicializar el componente
   }
 
-  // loginUser() {
-  //   // Validación: Verificar que los campos no estén vacíos
-  //   if (this.e_mail === '' || this.password === '') {
-  //     this.toastr.error('Debes ingresar un email y una contraseña');
-  //     return;  // Evitar que se siga ejecutando el código si hay error
-  //   }
-
-  //   // Crear objeto con los datos ingresados por el usuario
-  //   const userlog: Userlog = {
-  //     e_mail: this.e_mail,       // Correo electrónico
-  //     password: this.password    // Contraseña
-  //   };
-
-  //   console.log(userlog);  // Imprimir datos para verificar el objeto
-
-  //   // Llamar al servicio de login y manejar la respuesta
-  //   this.userService.loginUser(userlog).subscribe({
-  //     next: (response: any) => {
-  //       // Si el login es exitoso, guardar el token y redirigir
-  //       const token = response.token;  // Asegúrate que la respuesta tenga el token en esta propiedad
-  //       localStorage.setItem('token', token);  // Guardar token en el localStorage
-  //       console.log('Token guardado:', token);
-
-
-  //       // Redireccionar a la página principal u otra
-  //       this.router.navigate(['/home/dashboard']);  // Cambia '/' por la ruta a la que quieres redirigir
-  //     },
-  //     error: (e: HttpErrorResponse) => {
-  //       // Manejar errores en el login
-  //       this.msjError(e);  // Mostrar mensaje de error personalizado
-  //     }
-  //   });
-  // }
-
-
   loginUser() {
     // Validación: Verificar que los campos no estén vacíos
     if (this.e_mail === '' || this.password === '') {
@@ -89,8 +54,14 @@ export class LoginComponent implements OnInit {
         let jwt = decode(token);  // Cambiado para usar el token real
         console.log('Token decodificado:', jwt);  // Mostrar el token decodificado
 
+
         // Redireccionar a la página principal u otra
         this.router.navigate(['/home/dashboard']);  // Cambia '/' por la ruta a la que quieres redirigir
+        // Refrescar la página
+        // window.location.reload();
+         // Redireccionar a la página principal u otra
+        //  this.router.navigate(['/home/dashboard']);  // Cambia '/' por la ruta a la que quieres redirigir
+        window.location.href = '/home/dashboard';
       },
       error: (e: HttpErrorResponse) => {
         // Manejar errores en el login

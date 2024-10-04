@@ -34,7 +34,7 @@ class LoginController {
 	public async create(req: Request, resp: Response): Promise<void> {
 		try {
 			// Obtener la contraseña y el correo electrónico del cuerpo de la solicitud
-			const { password, e_mail, nombre, ape_paterno, ape_materno, telefono, grupo, id_carrera } = req.body;
+			const { password, e_mail, nombre, ape_paterno, ape_materno, telefono, grupo, id_carrera, id_rol } = req.body;
 
 			// Verificar si el correo electrónico ya está registrado
 			const existingUser = await pool.query('SELECT * FROM tb_usuarios WHERE e_mail = ?', [e_mail]);
@@ -65,7 +65,9 @@ class LoginController {
 				password: hashedPassword,
 				telefono,
 				grupo,
-				id_carrera
+				id_carrera,
+				id_rol,
+				imagen_url: 'https://images.unsplash.com/photo-1727713274968-ebd3714a5c55?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 			};
 
 
