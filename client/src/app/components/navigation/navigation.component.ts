@@ -16,6 +16,9 @@ export class NavigationComponent implements OnInit {
   errorMessage: string = '';
 
 
+  isLoggedInIdAdmin: boolean = false;
+
+
   user: User = {
     nombre: '',
     ape_paterno: '',
@@ -32,7 +35,13 @@ export class NavigationComponent implements OnInit {
   constructor(private router: Router, private authService: AuthService, private userService: UserService) {}
 
   ngOnInit() {
-    this.authService.currentStatus.subscribe((status) => {this.isLoggedIn = status; });
+    this.authService.currentStatus.subscribe((status) => {
+      this.isLoggedIn = status;
+    });
+
+    this.authService.currentStatusId.subscribe((status) => {
+      this.isLoggedInIdAdmin = status;
+    });
   }
 
   toggleMenu() {
@@ -45,16 +54,17 @@ export class NavigationComponent implements OnInit {
 
   logOut() {
     this.authService.logOut();
-    this.router.navigate(['/login']);
-  }
-
-  logOutId() {
-    this.authService.logOut();
-    this.router.navigate(['/login']);
+    // this.router.navigate(['/login']);
+    window.location.href = '/home';
   }
 
   selectMenuItem() {
     this.isMenuOpen = false;
   }
+
+  // Añade este método para verificar si el usuario es admin
+  // showAdminMenu(): boolean {
+  //   return this.isLoggedInIdAdmin; // Aquí se puede ajustar la lógica si es necesario
+  // }
 
 }

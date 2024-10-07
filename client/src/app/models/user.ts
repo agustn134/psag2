@@ -11,5 +11,5 @@ export interface User {
   nombre_carrera?: string;
   id_rol: string; //
   rol_nombre?: string; //
-  imagen_url: string;
+  imagen_url?: string;
 }

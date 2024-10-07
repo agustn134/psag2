@@ -29,10 +29,6 @@
               Inicio
             </a>
 
-            <a *ngIf="isLoggedIn" routerLink="/home/dashboard" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page">
-              Inicio
-            </a>
-
             <a routerLink="/location" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page">
               Ubicación
             </a>
@@ -49,12 +45,12 @@
               Agendar Cita
             </a>
 
-            <a routerLink="/contact" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"  aria-current="page">
-              Contacto
+            <a *ngIf="isLoggedIn && isLoggedInIdAdmin" routerLink="profile/add-profiles" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page">
+              Añadir Perfiles
             </a>
 
-            <a *ngIf="isLoggedIn" routerLink="profile/add-profiles" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page">
-              Añadir Perfiles
+            <a routerLink="/contact" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"  aria-current="page">
+              Contacto
             </a>
 
           </div>
@@ -97,12 +93,16 @@
               Perfil
             </a>
 
-            <a *ngIf=" isLoggedIn" class="block px-4 py-2 text-sm text-gray-700" routerLink="profile/add-profiles" role="menuitem"   tabindex="-1" id="user-menu-item-0">
+            <a *ngIf=" isLoggedIn && isLoggedInIdAdmin" class="block px-4 py-2 text-sm text-gray-700" routerLink="profile/add-profiles" role="menuitem"   tabindex="-1" id="user-menu-item-0">
               Añadir Perfiles
             </a>
 
             <a *ngIf="isLoggedIn" (click)="logOut()" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"  tabindex="-1" id="user-menu-item-1">
               Cerrar Sesión
+            </a>
+
+            <a class="block px-4 py-2 text-sm text-gray-700" routerLink="/login" role="menuitem"   tabindex="-1" id="user-menu-item-0">
+              Iniciar Seción
             </a>
           </div>
 
@@ -128,11 +128,15 @@
       </a>
 
       <a *ngIf="isLoggedIn" (click)="selectMenuItem()" routerLink="/games" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-        Games
+        Cita
       </a>
 
-      <a *ngIf="isLoggedIn && user.id_rol === '3'" (click)="selectMenuItem()" routerLink="/games/add" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-        Add Games
+      <a *ngIf="isLoggedIn" (click)="selectMenuItem()" routerLink="/games/add" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+        Crear cita
+      </a>
+
+      <a *ngIf="isLoggedIn && isLoggedInIdAdmin" (click)="selectMenuItem()" routerLink="/profile/add-profiles" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+        Añadir Perfiles
       </a>
 
       <a (click)="selectMenuItem()" routerLink="contact" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
