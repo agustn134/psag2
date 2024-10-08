@@ -14,6 +14,7 @@ import { AddProfilesComponent } from './components/add-profiles/add-profiles.com
 import { LocationComponent } from './components/location/location.component';
 import { VisualInformationComponent } from './components/visual-information/visual-information.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { YtComponent } from './components/yt/yt.component';
 
 const routes: Routes = [
 
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'games/edit/:id', component: GameFormComponent, canActivate: [AuthGuard] }, // Protección añadida
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'profile/add-profiles', component: AddProfilesComponent, canActivate: [AuthGuard] },
+  { path: 'yt', component: YtComponent}
 
 ];
 
