@@ -131,6 +131,10 @@
         Información Visual
       </a>
 
+      <a (click)="selectMenuItem()" routerLink="yt" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+        YouTube
+      </a>
+
       <a *ngIf="isLoggedIn" (click)="selectMenuItem()" routerLink="/games" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
         Cita
       </a>
