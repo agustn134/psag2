@@ -31,6 +31,7 @@ export class RegisterComponent {
       telefono: ['', Validators.required],
       grupo: ['', Validators.required],
       id_carrera: ['', Validators.required],
+      id_rol: [],
     });
   }
 

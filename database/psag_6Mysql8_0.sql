@@ -118,8 +118,8 @@ CREATE TABLE `tb_usuarios` (
   `password` varchar(255) NOT NULL,
   `telefono` varchar(15) NOT NULL,
   `id_carrera` int(11) DEFAULT NULL,
-  `grupo` varchar(8) DEFAULT NULL,
-  `id_rol` int(11) NOT NULL DEFAULT 1,
+  `grupo` varchar(8) DEFAULT NULL, 
+  `id_rol` int(11) NOT NULL DEFAULT 1, 
   PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

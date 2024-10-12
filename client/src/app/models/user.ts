@@ -9,7 +9,7 @@ export interface User {
   grupo: string;    // Contraseña (opcional si no deseas incluirla al obtener datos)
   id_carrera : string; //
   nombre_carrera?: string;
-  id_rol: string; //
+  id_rol?: string; //
   rol_nombre?: string; //
   imagen_url?: string;
 }
