@@ -44,7 +44,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AddTokenInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router) {} // Solo mantenemos el Router en el constructor
+  constructor(private router: Router) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token');

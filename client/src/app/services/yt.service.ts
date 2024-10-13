@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 export class YtService {
   //private apiKey = 'AIzaSyBcooOo0Ow2K-d5Gc_VzXt_3l4nLzs7PcI';
   //private  = 'AIzaSyCmzTulvkHw2x236eZPgNUuLSoSrWHKVt0';
-  private apiKey = 'AIzaSyCVWZU1eyZEDZqxwXwX9p_big7Enx6aPkM'; //Mi clave
-  private apiUrl = 'https://www.googleapis.com/youtube/v3';
-  
+  public apiKey = 'AIzaSyCVWZU1eyZEDZqxwXwX9p_big7Enx6aPkM'; //Mi clave
+  public apiUrl = 'https://www.googleapis.com/youtube/v3';
+
   constructor(private http: HttpClient) { }
 
   getVideos(query: string): Observable<any> {
