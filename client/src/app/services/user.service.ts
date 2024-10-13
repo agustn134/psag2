@@ -64,6 +64,18 @@ export class UserService {
   }
 
 
+  // Método para obtener el perfil del usuario autenticado
+getUserProfile(): Observable<User> {
+  const userId = this.getUserIdFromToken();
+  if (userId !== null) {
+    return this.getUserById(userId); // Utiliza el método ya existente para obtener un usuario por ID
+  } else {
+    throw new Error("No se pudo obtener el ID de usuario desde el token.");
+  }
+}
+
+
+
 
 }
 

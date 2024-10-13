@@ -14,10 +14,7 @@ export class NavigationComponent implements OnInit {
   isMenuOpenProfile: boolean = false;
   isLoggedIn: boolean = false;
   errorMessage: string = '';
-
-
   isLoggedInIdAdmin: boolean = false;
-
 
   user: User = {
     nombre: '',
@@ -37,6 +34,16 @@ export class NavigationComponent implements OnInit {
   ngOnInit() {
     this.authService.currentStatus.subscribe((status) => {
       this.isLoggedIn = status;
+      if (this.isLoggedIn) {
+        this.userService.getUserProfile().subscribe(
+          (user) => {
+            this.user = user;  // Asigna los datos del usuario al objeto 'user'
+          },
+          (error) => {
+            console.error('Error al obtener el perfil del usuario:', error);
+          }
+        );
+      }
     });
 
     this.authService.currentStatusId.subscribe((status) => {
@@ -54,17 +61,11 @@ export class NavigationComponent implements OnInit {
 
   logOut() {
     this.authService.logOut();
-    // this.router.navigate(['/login']);
     window.location.href = '/home';
   }
 
   selectMenuItem() {
     this.isMenuOpen = false;
   }
-
-  // Añade este método para verificar si el usuario es admin
-  // showAdminMenu(): boolean {
-  //   return this.isLoggedInIdAdmin; // Aquí se puede ajustar la lógica si es necesario
-  // }
 
 }

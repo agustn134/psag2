@@ -33,12 +33,12 @@ export class AddProfilesComponent {
       id_carrera: ['', Validators.required],
       grupo: ['', Validators.required],
       id_rol: ['', Validators.required],
+      imagen_url: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
     this.getUsers();
-    this.createUser();
   }
 
 
@@ -59,7 +59,7 @@ export class AddProfilesComponent {
         return;
       }
 
-      const user: User = this.registerForm.value; // Obtener los valores del formulario
+      const user: User = this.registerForm.value;
 
       this.userService.createUser(user).subscribe({
         next: (data) => {

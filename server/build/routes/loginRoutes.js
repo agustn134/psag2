@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const loginController_1 = __importDefault(require("../controllers/loginController"));
+const adminController_1 = __importDefault(require("../controllers/adminController"));
 class LoginRoutes {
     constructor() {
         this.router = (0, express_1.Router)();
@@ -17,6 +18,8 @@ class LoginRoutes {
         this.router.get('/:id_usuario', loginController_1.default.getOne);
         // Ruta para crear un nuevo usuario
         this.router.post('/', loginController_1.default.create);
+        // Ruta para crear un usuario por Admin
+        this.router.post('/', adminController_1.default.create);
         // Ruta para actualizar un usuario por su ID
         this.router.put('/:id_usuario', loginController_1.default.put);
         // Ruta para eliminar un usuario por su ID

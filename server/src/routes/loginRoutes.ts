@@ -1,5 +1,6 @@
 import { Router } from "express";
 import loginController from "../controllers/loginController";
+import adminController from "../controllers/adminController";
 
 class LoginRoutes{
     public router: Router = Router();
@@ -15,6 +16,8 @@ class LoginRoutes{
         this.router.get('/:id_usuario', loginController.getOne);
         // Ruta para crear un nuevo usuario
         this.router.post('/', loginController.create);
+        // Ruta para crear un usuario por Admin
+        this.router.post('/', adminController.create);
         // Ruta para actualizar un usuario por su ID
         this.router.put('/:id_usuario', loginController.put);
         // Ruta para eliminar un usuario por su ID
