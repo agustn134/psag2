@@ -14,7 +14,6 @@ import { AddProfilesComponent } from './components/add-profiles/add-profiles.com
 import { LocationComponent } from './components/location/location.component';
 import { VisualInformationComponent } from './components/visual-information/visual-information.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { YtComponent } from './components/yt/yt.component';
 
 const routes: Routes = [
 
@@ -28,13 +27,11 @@ const routes: Routes = [
   { path: 'visual-information', component: VisualInformationComponent},
   { path: 'contact', component: ContactComponent},
   { path: 'home/dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'games', component: GameListComponent, canActivate: [AuthGuard] }, // Usando AuthGuard
-  { path: 'games/add', component: GameFormComponent, canActivate: [AuthGuard] }, // Usando AuthGuard
-  { path: 'games/edit/:id', component: GameFormComponent, canActivate: [AuthGuard] }, // Protección añadida
+  { path: 'games', component: GameListComponent, canActivate: [AuthGuard] },
+  { path: 'games/add', component: GameFormComponent, canActivate: [AuthGuard] },
+  { path: 'games/edit/:id', component: GameFormComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'profile/add-profiles', component: AddProfilesComponent, canActivate: [AuthGuard] },
-  { path: 'yt', component: YtComponent}
-
+  { path: 'profile/add-profiles', component: AddProfilesComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

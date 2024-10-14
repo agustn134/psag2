@@ -90,7 +90,6 @@ import { AddProfilesComponent } from './components/add-profiles/add-profiles.com
 import { LocationComponent } from './components/location/location.component';
 import { VisualInformationComponent } from './components/visual-information/visual-information.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { YtComponent } from './components/yt/yt.component'; // Importa la clase
 
 @NgModule({
   declarations: [
@@ -110,7 +109,7 @@ import { YtComponent } from './components/yt/yt.component'; // Importa la clase
     LocationComponent,
     VisualInformationComponent,
     ContactComponent,
-    YtComponent
+
   ],
   imports: [
     BrowserModule,
