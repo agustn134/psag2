@@ -41,7 +41,9 @@ export class AddProfilesComponent {
       (err) => console.log(err)
     );
   }
+
   adduserbyAdmin() {
     throw new Error('Method not implemented.');
   }
+
 }
