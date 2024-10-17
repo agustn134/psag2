@@ -42,8 +42,28 @@ export class AddProfilesComponent {
     );
   }
 
-  adduserbyAdmin() {
-    throw new Error('Method not implemented.');
+  adduserbyAdmin(): void {
+    const newUser = {
+      nombre: this.nombre,
+      ape_paterno: this.ape_paterno,
+      ape_materno: this.ape_materno,
+      e_mail: this.e_mail,
+      password: this.password,
+      telefono: this.telefono,
+      id_carrera: this.id_carrera,
+      grupo: this.grupo,
+      id_rol: this.id_rol,
+      imagen_url: this.imagen_url
+    };
+
+    this.userService.createUserByAdmin(newUser).subscribe(
+      (res) => {
+        console.log('Usuario registrado exitosamente', res);
+        this.getUsers(); // Actualizar la lista de usuarios
+      },
+      (err) => console.error('Error al registrar el usuario', err)
+    );
   }
+
 
 }
