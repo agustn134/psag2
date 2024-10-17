@@ -6,6 +6,7 @@ import cors from 'cors';
 import indexRoutes from './routes/indexRoutes';
 import gamesRoutes from './routes/gamesRoutes';
 import loginRoutes from './routes/loginRoutes'; // Asegúrate de importar las rutas de login
+import userRoutes from './routes/userRoutes';
 
 class Server {
     public app: Application;
@@ -27,6 +28,7 @@ class Server {
         this.app.use('/', indexRoutes);
         this.app.use('/api/games', gamesRoutes);
         this.app.use('/api/login', loginRoutes);
+        this.app.use('/api/user', userRoutes);
     }
 
     start(): void {

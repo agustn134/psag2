@@ -7,7 +7,7 @@ async function connectToDatabase() {
     pool.getConnection()
 	.then(connection =>{
 		pool.releaseConnection(connection);
-		console.log('Base de Datos Conectada...');
+		console.log('...CONECTADO A LA BASE DE DATOS.');
 }); 
 
 }

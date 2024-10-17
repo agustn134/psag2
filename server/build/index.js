@@ -10,6 +10,7 @@ const cors_1 = __importDefault(require("cors"));
 const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
 const gamesRoutes_1 = __importDefault(require("./routes/gamesRoutes"));
 const loginRoutes_1 = __importDefault(require("./routes/loginRoutes")); // Asegúrate de importar las rutas de login
+const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -26,6 +27,7 @@ class Server {
         this.app.use('/', indexRoutes_1.default);
         this.app.use('/api/games', gamesRoutes_1.default);
         this.app.use('/api/login', loginRoutes_1.default);
+        this.app.use('/api/user', userRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {
