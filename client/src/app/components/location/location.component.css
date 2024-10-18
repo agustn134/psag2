@@ -1,1 +1,18 @@
-/* #map { height: 180px; } */
+@import url("https://unpkg.com/leaflet@1.7.1/dist/leaflet.css");
+@import url("leaflet-routing-machine/dist/leaflet-routing-machine.css");
+
+  #map {
+    height: 710px; /* Altura fija del mapa */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  
+  }
+  .leaflet-routing-container {
+    background-color: rgba(50, 50, 50, 0.8); /* Fondo oscuro con 80% de opacidad */
+    color: white; /* Texto blanco para mejorar la visibilidad */
+    padding: 10px; /* Añadir espacio interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3); /* Sombra para darle más profundidad */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borde blanco tenue */
+  }
+  
