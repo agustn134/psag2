@@ -15,6 +15,7 @@ import { LocationComponent } from './components/location/location.component';
 import { VisualInformationComponent } from './components/visual-information/visual-information.component';
 import { ContactComponent } from './components/contact/contact.component';
 
+
 const routes: Routes = [
 
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -31,7 +32,8 @@ const routes: Routes = [
   { path: 'games/add', component: GameFormComponent, canActivate: [AuthGuard] },
   { path: 'games/edit/:id', component: GameFormComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'profile/add-profiles', component: AddProfilesComponent, canActivate: [AuthGuard] }
+  { path: 'profile/add-profiles', component: AddProfilesComponent, canActivate: [AuthGuard] },
+
 ];
 
 @NgModule({

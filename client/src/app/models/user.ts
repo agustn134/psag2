@@ -1,5 +1,5 @@
 export interface User {
-  // id_usuario: number;   // ID del usuario
+  id_usuario?: string;   // ID del usuario
   nombre: string;       // Nombre del usuario
   ape_paterno: string;  // Apellido paterno
   ape_materno: string;  // Apellido materno

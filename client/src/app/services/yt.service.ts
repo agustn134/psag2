@@ -6,8 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class YtService {
-  //private apiKey = 'AIzaSyBcooOo0Ow2K-d5Gc_VzXt_3l4nLzs7PcI';
-  //private  = 'AIzaSyCmzTulvkHw2x236eZPgNUuLSoSrWHKVt0';
+
   public apiKey = 'AIzaSyCVWZU1eyZEDZqxwXwX9p_big7Enx6aPkM'; //Mi clave
   public apiUrl = 'https://www.googleapis.com/youtube/v3';
 

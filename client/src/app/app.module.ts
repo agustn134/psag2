@@ -68,7 +68,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserFormComponent } from './components/user-form/user-form.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { GameFormComponent } from './components/game-form/game-form.component';
 import { GameListComponent } from './components/game-list/game-list.component';
@@ -94,7 +93,6 @@ import { ContactComponent } from './components/contact/contact.component';
 @NgModule({
   declarations: [
     AppComponent,
-    UserFormComponent,
     NavigationComponent,
     GameFormComponent,
     GameListComponent,
@@ -109,6 +107,8 @@ import { ContactComponent } from './components/contact/contact.component';
     LocationComponent,
     VisualInformationComponent,
     ContactComponent,
+
+
 
   ],
   imports: [
