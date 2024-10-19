@@ -86,7 +86,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AddTokenInterceptor } from './utils/add-token.interceptor';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AddProfilesComponent } from './components/add-profiles/add-profiles.component';
-import { LocationComponent } from './components/location/location.component';
+// import { LocationComponent } from './components/location/location.component';
 import { VisualInformationComponent } from './components/visual-information/visual-information.component';
 import { ContactComponent } from './components/contact/contact.component';
 
@@ -104,7 +104,7 @@ import { ContactComponent } from './components/contact/contact.component';
     SpinnerComponent,
     ProfileComponent,
     AddProfilesComponent,
-    LocationComponent,
+    // LocationComponent,
     VisualInformationComponent,
     ContactComponent,
 

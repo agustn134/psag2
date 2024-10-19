@@ -48,6 +48,13 @@ export class AddTokenInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token');
+    console.log(token); // Verifica el valor del token
+
+    // Si la solicitud es hacia la API de YT, no agregar el token de usuario
+    if (req.url.includes('https://www.googleapis.com/youtube/v3')) {
+      return next.handle(req); // No agregar el token, solo pasar la solicitud
+    }
+
 
     let authReq = req;
     if (token) {
