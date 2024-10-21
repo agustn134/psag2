@@ -68,7 +68,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserFormComponent } from './components/user-form/user-form.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { GameFormComponent } from './components/game-form/game-form.component';
 import { GameListComponent } from './components/game-list/game-list.component';
@@ -87,14 +86,13 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AddTokenInterceptor } from './utils/add-token.interceptor';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AddProfilesComponent } from './components/add-profiles/add-profiles.component';
-import { LocationComponent } from './components/location/location.component';
+// import { LocationComponent } from './components/location/location.component';
 import { VisualInformationComponent } from './components/visual-information/visual-information.component';
 import { ContactComponent } from './components/contact/contact.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserFormComponent,
     NavigationComponent,
     GameFormComponent,
     GameListComponent,
@@ -106,9 +104,11 @@ import { ContactComponent } from './components/contact/contact.component';
     SpinnerComponent,
     ProfileComponent,
     AddProfilesComponent,
-    LocationComponent,
+    // LocationComponent,
     VisualInformationComponent,
     ContactComponent,
+
+
 
   ],
   imports: [

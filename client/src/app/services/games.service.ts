@@ -39,24 +39,3 @@ export class GamesService {
 }
 
 
-
-
-  // getGames(){
-  //     return this.http.get(`${this.API_URI}/games`);
-  // }
-
-  // getGame(id: string){
-  //   return this.http.get(`${this.API_URI}/games/${id}`);
-  // }
-
-  // saveGame(game: Game){
-  //   return this.http.post(`${this.API_URI}/games`, game);
-  // }
-
-  // updateGame(id: string| Number, updateGame:Game): Observable<Game>{
-  //   return this.http.put(`${this.API_URI}/games/${id}`, updateGame);
-  // }
-
-  // deleteGame(id: string | Number){
-  //   return this.http.delete(`${this.API_URI}/games/${id}`);
-  // }

@@ -11,9 +11,10 @@ import { ForgetpasswordComponent } from './components/forgetpassword/forgetpassw
 import { AuthGuard } from './utils/auth.guard'; // Cambiado a AuthGuard
 import { ProfileComponent } from './components/profile/profile.component';
 import { AddProfilesComponent } from './components/add-profiles/add-profiles.component';
-import { LocationComponent } from './components/location/location.component';
+// import { LocationComponent } from './components/location/location.component';
 import { VisualInformationComponent } from './components/visual-information/visual-information.component';
 import { ContactComponent } from './components/contact/contact.component';
+
 
 const routes: Routes = [
 
@@ -23,7 +24,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'forgetpassword', component: ForgetpasswordComponent },
   { path: 'resetpassword', component: ResetpasswordComponent },
-  { path: 'location', component: LocationComponent},
+  // { path: 'location', component: LocationComponent},
   { path: 'visual-information', component: VisualInformationComponent},
   { path: 'contact', component: ContactComponent},
   { path: 'home/dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -31,7 +32,8 @@ const routes: Routes = [
   { path: 'games/add', component: GameFormComponent, canActivate: [AuthGuard] },
   { path: 'games/edit/:id', component: GameFormComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'profile/add-profiles', component: AddProfilesComponent, canActivate: [AuthGuard] }
+  { path: 'profile/add-profiles', component: AddProfilesComponent, canActivate: [AuthGuard] },
+
 ];
 
 @NgModule({
