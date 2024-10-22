@@ -86,9 +86,11 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AddTokenInterceptor } from './utils/add-token.interceptor';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AddProfilesComponent } from './components/add-profiles/add-profiles.component';
-// import { LocationComponent } from './components/location/location.component';
+import { LocationComponent } from './components/location/location.component';
 import { VisualInformationComponent } from './components/visual-information/visual-information.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { PaypalComponent } from './components/paypal/paypal.component';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 @NgModule({
   declarations: [
@@ -104,9 +106,11 @@ import { ContactComponent } from './components/contact/contact.component';
     SpinnerComponent,
     ProfileComponent,
     AddProfilesComponent,
-    // LocationComponent,
+    LocationComponent,
     VisualInformationComponent,
     ContactComponent,
+    PaypalComponent,
+  
 
 
 
@@ -118,6 +122,7 @@ import { ContactComponent } from './components/contact/contact.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NgxPayPalModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
       timeOut: 2000,
