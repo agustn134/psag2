@@ -1,0 +1,7 @@
+<p>plus-psychology works!</p>
+<div *ngIf="showDetails">
+  <h2>{{ showDetails.name }}</h2>
+  <img [src]="showDetails.images[0]?.url" alt="{{ showDetails.name }}" />
+  <p>{{ showDetails.description }}</p>
+  <a [href]="showDetails.external_urls.spotify" target="_blank">Escuchar en Spotify</a>
+</div>

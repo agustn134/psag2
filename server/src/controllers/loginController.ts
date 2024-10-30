@@ -67,7 +67,7 @@ class LoginController {
 				grupo,
 				id_carrera,
 				// id_rol,
-				imagen_url: 'https://images.unsplash.com/photo-1727713274968-ebd3714a5c55?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+				imagen_url: '',
 			};
 
 			

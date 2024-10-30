@@ -55,6 +55,11 @@ export class AddTokenInterceptor implements HttpInterceptor {
       return next.handle(req); // No agregar el token, solo pasar la solicitud
     }
 
+    // Si la solicitud es hacia la API de YT, no agregar el token de usuario
+    if (req.url.includes('https://accounts.spotify.com/authorize')) {
+      return next.handle(req); // No agregar el token, solo pasar la solicitud
+    }
+
 
     let authReq = req;
     if (token) {

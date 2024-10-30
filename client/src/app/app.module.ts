@@ -91,6 +91,8 @@ import { VisualInformationComponent } from './components/visual-information/visu
 import { ContactComponent } from './components/contact/contact.component';
 import { PaypalComponent } from './components/paypal/paypal.component';
 import { NgxPayPalModule } from 'ngx-paypal';
+import { CallbackComponent } from './components/callback/callback.component';
+import { PlusPsychologyComponent } from './components/plus-psychology/plus-psychology.component';
 
 @NgModule({
   declarations: [
@@ -110,7 +112,9 @@ import { NgxPayPalModule } from 'ngx-paypal';
     VisualInformationComponent,
     ContactComponent,
     PaypalComponent,
-  
+    CallbackComponent,
+    PlusPsychologyComponent,
+
 
 
 

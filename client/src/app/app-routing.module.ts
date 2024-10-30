@@ -14,6 +14,8 @@ import { AddProfilesComponent } from './components/add-profiles/add-profiles.com
 import { LocationComponent } from './components/location/location.component';
 import { VisualInformationComponent } from './components/visual-information/visual-information.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { CallbackComponent } from './components/callback/callback.component';
+import { PlusPsychologyComponent } from './components/plus-psychology/plus-psychology.component';
 
 
 const routes: Routes = [
@@ -33,6 +35,8 @@ const routes: Routes = [
   { path: 'games/edit/:id', component: GameFormComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'profile/add-profiles', component: AddProfilesComponent, canActivate: [AuthGuard] },
+  { path: 'callback', component: CallbackComponent},
+  { path: 'plus-psychology', component: PlusPsychologyComponent},
 
 ];
 

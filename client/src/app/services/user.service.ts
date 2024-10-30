@@ -213,5 +213,23 @@ export class UserService {
     }
   }
 
+      /**
+     * Obtiene todas las carreras de la API.
+     * @returns Un Observable que emite una lista de carreras.
+     */
+    getCarreras(): Observable<any[]> {
+      return this.http.get<any[]>(`${this.apiUrl}/user/carreras`);
+    }
+
+    /**
+    * Obtiene todos los roles de la API.
+    * @returns Un Observable que emite una lista de roles.
+    */
+    getRoles(): Observable<any[]> {
+      return this.http.get<any[]>(`${this.apiUrl}/user/roles`);
+    }
+
+
+
 
 }

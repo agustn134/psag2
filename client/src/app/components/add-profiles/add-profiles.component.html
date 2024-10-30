@@ -44,21 +44,37 @@
             [(ngModel)]="telefono" />
         </div>
 
-        <div class="flex items-center border-2 mb-8 py-2 px-3 rounded-2xl">
+        <!-- Carrera -->
 
+        <!-- <div class="flex items-center border-2 mb-8 py-2 px-3 rounded-2xl">
           <input class="pl-2 w-full outline-none border-none" type="text" placeholder="id_carrera"
             [(ngModel)]="id_carrera" />
-        </div>
+        </div> -->
+
+        <!-- Campo para id_carrera -->
+<div class="flex items-center border-2 mb-8 py-2 px-3 rounded-2xl">
+  <select class="pl-2 w-full outline-none border-none" [(ngModel)]="id_carrera">
+    <option value="" disabled selected>Selecciona Carrera</option>
+    <option *ngFor="let carrera of carreras" [value]="carrera.id">{{ carrera.nombre }}</option>
+  </select>
+</div>
 
         <div class="flex items-center border-2 mb-8 py-2 px-3 rounded-2xl">
 
           <input class="pl-2 w-full outline-none border-none" type="text" placeholder="grupo" [(ngModel)]="grupo" />
         </div>
 
-        <div class="flex items-center border-2 mb-8 py-2 px-3 rounded-2xl">
-
+        <!-- rol -->
+        <!-- <div class="flex items-center border-2 mb-8 py-2 px-3 rounded-2xl">
           <input class="pl-2 w-full outline-none border-none" type="text" placeholder="id_rol" [(ngModel)]="id_rol" />
-        </div>
+        </div> -->
+        <!-- Campo para id_rol -->
+<div class="flex items-center border-2 mb-8 py-2 px-3 rounded-2xl">
+  <select class="pl-2 w-full outline-none border-none" [(ngModel)]="id_rol">
+    <option value="" disabled selected>Selecciona Rol</option>
+    <option *ngFor="let rol of roles" [value]="rol.id">{{ rol.nombre }}</option>
+  </select>
+</div>
 
         <div class="flex items-center border-2 mb-8 py-2 px-3 rounded-2xl">
 
@@ -135,13 +151,7 @@
               </td>
               <td class="p-4 border-b border-slate-200 text-sm font-semibold text-slate-700">{{ user.id_usuario }}</td>
               <td class="p-4 border-b border-slate-200 text-sm font-semibold text-slate-700">{{ user.id_rol }}</td>
-              <!-- <td class="p-4 border-b border-slate-200">
-                <div class="px-2 py-1 text-xs font-bold text-green-900 bg-green-500/20 rounded-md">
-                  Enlinea
-                </div>
-              </td> -->
               <td class="p-4 border-b border-slate-200">
-                <!-- Boton para borrar usario -->
                 <button *ngIf="user.id_usuario" (click)="deleteUser(user.id_usuario)"
                   class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-slate-900 transition-all hover:bg-slate-900/10 active:bg-slate-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"

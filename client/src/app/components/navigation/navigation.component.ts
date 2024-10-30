@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../utils/auth.service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
+import { SpotifyAuthService } from '../../services/spotify-auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -29,7 +30,7 @@ export class NavigationComponent implements OnInit {
     id_rol: '',
   };
 
-  constructor(private router: Router, private authService: AuthService, private userService: UserService) {}
+  constructor(private router: Router, private authService: AuthService, private userService: UserService, private spotifyAuthService: SpotifyAuthService) {}
 
   ngOnInit() {
     this.authService.currentStatus.subscribe((status) => {
@@ -66,6 +67,10 @@ export class NavigationComponent implements OnInit {
 
   selectMenuItem() {
     this.isMenuOpen = false;
+  }
+
+  login() {
+    this.spotifyAuthService.login(); // Inicia el proceso de autenticación
   }
 
 }

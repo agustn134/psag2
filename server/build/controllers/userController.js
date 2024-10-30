@@ -36,69 +36,6 @@ class UserController {
             }
         });
     }
-    // Crear un nuevo usuario
-    // public async create(req: Request, res: Response): Promise<void> {
-    //     try {
-    //         const { password, e_mail } = req.body;
-    //         const existingUser = await pool.query('SELECT * FROM tb_usuarios WHERE e_mail = ?', [e_mail]);
-    //         if (existingUser.length > 0) {
-    //              res.status(400).json({ message: 'Email already exists' });
-    //         }
-    //         const saltRounds = 10;
-    //         const hashedPassword = await bcrypt.hash(password, saltRounds);
-    //         const newUser = {
-    //             ...req.body,
-    //             password: hashedPassword
-    //         };
-    //         await pool.query('INSERT INTO tb_usuarios SET ?', [newUser]);
-    //         res.json({ message: 'User created' });
-    //     } catch (error) {
-    //         res.status(500).json({ message: 'Error creating user' });
-    //     }
-    // }
-    // public async create(req: Request, resp: Response): Promise<void> {
-    // 	try {
-    // 		// Obtener la contraseña y el correo electrónico del cuerpo de la solicitud
-    // 		const { password, e_mail, nombre, ape_paterno, ape_materno, telefono, grupo, id_carrera, id_rol } = req.body;
-    // 		// Verificar si el correo electrónico ya está registrado
-    // 		const existingUser = await pool.query('SELECT * FROM tb_usuarios WHERE e_mail = ?', [e_mail]);
-    // 		if (existingUser.length > 0) {
-    // 			resp.status(400).json({ message: 'Email already exists' });
-    // 		}
-    // 		// Generar el hash de la contraseña usando bcrypt
-    // 		const saltRounds = 10;
-    // 		const hashedPassword = await bcrypt.hash(password, saltRounds);
-    // 		const existingCarrera = await pool.query(
-    //           "SELECT * FROM tb_carreras WHERE id_carrera = ?",
-    //           [id_carrera]
-    //         );
-    //         if (existingCarrera.length === 0) {
-    //           resp
-    //             .status(400)
-    //             .json({ message: "La carrera especificada no existe" });
-    //         }
-    // 		// Crear el nuevo usuario con todos los campos incluyendo el correo y la contraseña
-    // 		const newUser = {
-    // 			nombre,
-    // 			ape_paterno,
-    // 			ape_materno,
-    // 			e_mail, 
-    // 			password: hashedPassword,
-    // 			telefono,
-    // 			grupo,
-    // 			id_carrera,
-    // 			id_rol,
-    // 			imagen_url: '',
-    // 		};
-    // 		// Insertar el nuevo usuario en la base de datos
-    // 		await pool.query('INSERT INTO tb_usuarios SET ?', [newUser]);
-    // 		console.log(newUser); 
-    // 		resp.json({ message: 'User Saved' });
-    // 	} catch (error) {
-    // 		console.error('Error al crear usuario:', error);
-    // 		resp.status(500).json({ message: 'Error al crear el usuario' });
-    // 	}
-    // }
     create(req, resp) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -169,6 +106,32 @@ class UserController {
             const { id_usuario } = req.params;
             yield database_1.default.query('DELETE FROM tb_usuarios WHERE id_usuario = ?', [id_usuario]);
             res.json({ message: 'User deleted' });
+        });
+    }
+    // Obtener todas las carreras
+    getCarreras(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const carreras = yield database_1.default.query('SELECT * FROM tb_carreras');
+                res.json(carreras);
+            }
+            catch (error) {
+                console.error('Error al obtener carreras:', error);
+                res.status(500).json({ message: 'Error al obtener las carreras' });
+            }
+        });
+    }
+    // Obtener todos los roles
+    getRoles(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const roles = yield database_1.default.query('SELECT * FROM tb_roles');
+                res.json(roles);
+            }
+            catch (error) {
+                console.error('Error al obtener roles:', error);
+                res.status(500).json({ message: 'Error al obtener los roles' });
+            }
         });
     }
 }

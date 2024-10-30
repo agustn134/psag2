@@ -15,57 +15,12 @@ import { ToastrService } from 'ngx-toastr';  // Importar el servicio de Toastr
 export class AddProfilesComponent implements OnInit {
 
 
-  // deleteUser(id_usuario: string): void  {
-  //   this.userService.deleteUser(id_usuario).subscribe(
-  //     (res) => {
-  //       console.log(res);
-  //       this.getUsers(); // Update the user list after deletion
-  //     },
-  //     err => console.log(err)
-
-  //   );
-  // }
-
-  // deleteUser(id_usuario: string): void {
-  //   this.userService.deleteUser(id_usuario).subscribe(
-  //     (res) => {
-  //       console.log(res);
-  //       this.toastr.error('Usuario eliminado con éxito.', 'Usuario Eliminado');  // Mostrar Toastr
-  //       this.getUsers(); // Actualizar la lista de usuarios
-  //     },
-  //     (err) => {
-  //       console.error(err);
-  //       this.toastr.error('Error al eliminar el usuario.', 'Error');
-  //     }
-  //   );
-  // }
-
-  deleteUser(id_usuario: string): void {
-    this.userService.deleteUser(id_usuario).subscribe(
-      (res) => {
-        console.log(res);
-        this.toastr.success('Usuario eliminado con éxito.', 'Usuario Eliminado');
-
-        // Remover el usuario eliminado de la lista local
-        this.users = this.users.filter(user => user.id_usuario !== id_usuario);
-        this.filteredUsers = this.filteredUsers.filter(user => user.id_usuario !== id_usuario);
-      },
-      (err) => {
-        console.error(err);
-        this.toastr.error('Error al eliminar el usuario.', 'Error');
-      }
-    );
-  }
-
-
-
-
-
   users: User[] = [];
+  carreras: any[] = [];
+  roles: any[] = [];
 
   filteredUsers: User[] = [];
 
-  // Variables para almacenar datos
   nombre: string = '';
   ape_paterno: string = '';
   ape_materno: string = '';
@@ -80,15 +35,33 @@ export class AddProfilesComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+
   ) {}
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe((data: User[]) => {
       this.users = data;
-      this.filteredUsers = data; // Inicialmente la lista filtrada es igual a la lista completa
+      this.filteredUsers = data;
     });
+
+    this.loadCarreras();
+    this.loadRoles();
   }
+
+  loadCarreras(): void {
+    this.userService.getCarreras().subscribe({
+        next: (data) => this.carreras = data,
+        error: (error) => console.error('Error loading carreras', error)
+    });
+}
+
+loadRoles(): void {
+    this.userService.getRoles().subscribe({
+        next: (data) => this.roles = data,
+        error: (error) => console.error('Error loading roles', error)
+    });
+}
 
   getUsers(): void {
     this.userService.getUsers().subscribe(
@@ -102,8 +75,6 @@ export class AddProfilesComponent implements OnInit {
 
   filterUsers(event: Event): void {
     const searchTerm = (event.target as HTMLInputElement).value.toLowerCase();
-
-    // Filtramos los usuarios basado en el nombre, apellido o email
     this.filteredUsers = this.users.filter(
       (user) =>
         user.nombre.toLowerCase().includes(searchTerm) ||
@@ -125,7 +96,6 @@ export class AddProfilesComponent implements OnInit {
       grupo: this.grupo,
       id_rol: this.id_rol,
       imagen_url: this.imagen_url,
-      // No incluyes id_usuario, será generado por el backend
     };
 
     this.userService.createUserByAdmin(newUser).subscribe(
@@ -136,4 +106,23 @@ export class AddProfilesComponent implements OnInit {
       (err) => console.error('Error al registrar el usuario', err)
     );
   }
+
+
+  deleteUser(id_usuario: string): void {
+    this.userService.deleteUser(id_usuario).subscribe(
+      (res) => {
+        console.log(res);
+        this.toastr.success('Usuario eliminado con éxito.', 'Usuario Eliminado');
+
+        // Remover el usuario eliminado de la lista local
+        this.users = this.users.filter(user => user.id_usuario !== id_usuario);
+        this.filteredUsers = this.filteredUsers.filter(user => user.id_usuario !== id_usuario);
+      },
+      (err) => {
+        console.error(err);
+        this.toastr.error('Error al eliminar el usuario.', 'Error');
+      }
+    );
+  }
+
 }
