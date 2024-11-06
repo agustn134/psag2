@@ -1,0 +1,37 @@
+<div class="container mx-auto mt-5">
+  <h2 class="text-2xl font-bold mb-4">Listado de Citas</h2>
+  <table class="table-auto w-full text-left border-collapse border border-gray-300">
+    <thead>
+      <tr>
+        <th class="px-4 py-2 border">ID Cita</th>
+        <th class="px-4 py-2 border">Psicólogo</th>
+        <th class="px-4 py-2 border">Alumno</th>
+        <th class="px-4 py-2 border">Consultorio</th>
+        <th class="px-4 py-2 border">Horario</th>
+        <th class="px-4 py-2 border">Motivo</th>
+        <th class="px-4 py-2 border">Estatus</th>
+        <th class="px-4 py-2 border">Acciones</th> <!-- Nueva columna para los botones -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cita of citas">
+        <td class="px-4 py-2 border">{{ cita.id_cita }}</td>
+        <td class="px-4 py-2 border">{{ cita.id_psicologo }}</td>
+        <td class="px-4 py-2 border">{{ cita.id_alumno }}</td>
+        <td class="px-4 py-2 border">{{ cita.id_consultorio }}</td>
+        <td class="px-4 py-2 border">{{ cita.id_horario }}</td>
+        <td class="px-4 py-2 border">{{ cita.motivo }}</td>
+        <td class="px-4 py-2 border">{{ cita.estatus }}</td>
+        <td class="px-4 py-2 border">
+          <!-- Botones de acción -->
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mr-2">
+            Aceptar
+          </button>
+          <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">
+            Cancelar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

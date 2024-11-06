@@ -93,6 +93,7 @@ import { PaypalComponent } from './components/paypal/paypal.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { CallbackComponent } from './components/callback/callback.component';
 import { PlusPsychologyComponent } from './components/plus-psychology/plus-psychology.component';
+import { CitasComponent } from './components/citas/citas.component';
 
 @NgModule({
   declarations: [
@@ -114,6 +115,7 @@ import { PlusPsychologyComponent } from './components/plus-psychology/plus-psych
     PaypalComponent,
     CallbackComponent,
     PlusPsychologyComponent,
+    CitasComponent,
 
 
 

@@ -16,6 +16,7 @@ import { VisualInformationComponent } from './components/visual-information/visu
 import { ContactComponent } from './components/contact/contact.component';
 import { CallbackComponent } from './components/callback/callback.component';
 import { PlusPsychologyComponent } from './components/plus-psychology/plus-psychology.component';
+import { CitasComponent } from './components/citas/citas.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'profile/add-profiles', component: AddProfilesComponent, canActivate: [AuthGuard] },
   { path: 'callback', component: CallbackComponent},
   { path: 'plus-psychology', component: PlusPsychologyComponent},
+  { path: 'citas', component: CitasComponent},
 
 ];
 
