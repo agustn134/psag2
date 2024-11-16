@@ -4,13 +4,12 @@ import { cita } from '../models/cita';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CitaService {
-
   API_URI = 'http://localhost:3000/api';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // Obtener todas las citas
   getCitas(): Observable<cita[]> {
@@ -23,12 +22,14 @@ export class CitaService {
   }
 
   // Eliminar una cita
-  deleteCita(id: string): Observable<any> {  // Cambiado a any si deseas respuesta del servidor
+  deleteCita(id: string): Observable<any> {
+    // Cambiado a any si deseas respuesta del servidor
     return this.http.delete<any>(`${this.API_URI}/citas/${id}`);
   }
 
   // Guardar una nueva cita
-  saveCita(cita: cita): Observable<cita> { // Cambiado de consultorio a cita
+  saveCita(cita: cita): Observable<cita> {
+    // Cambiado de consultorio a cita
     return this.http.post<cita>(`${this.API_URI}/citas`, cita);
   }
 
@@ -36,19 +37,10 @@ export class CitaService {
   updateCita(id: string, updateCita: cita): Observable<cita> {
     return this.http.put<cita>(`${this.API_URI}/citas/${id}`, updateCita);
   }
+
+  // Método de actualización del estado
+  updateEstatus(id: string, estatus: string): Observable<any> {
+  return this.http.put<any>(`${this.API_URI}/citas/${id}/status`, { estatus });
+  }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
