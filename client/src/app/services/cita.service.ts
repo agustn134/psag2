@@ -30,7 +30,7 @@ export class CitaService {
   // Guardar una nueva cita
   saveCita(cita: cita): Observable<cita> {
     // Cambiado de consultorio a cita
-    return this.http.post<cita>(`${this.API_URI}/citas`, cita);
+    return this.http.post<cita>(`${this.API_URI}/citas/`, cita);
   }
 
   // Actualizar una cita existente

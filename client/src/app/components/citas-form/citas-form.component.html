@@ -1,0 +1,98 @@
+<!-- Toast Notification -->
+<div
+  *ngIf="showToast"
+  class="fixed top-5 right-5 z-50 p-4 rounded-md shadow-lg text-white"
+  [ngClass]="{
+    'bg-green-500': toastType === 'success',
+    'bg-red-500': toastType === 'error'
+  }"
+>
+  {{ toastMessage }}
+</div>
+
+<div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+  <h2 class="text-2xl font-semibold mb-4 text-center">Solicitar Cita</h2>
+  <form [formGroup]="citaForm" (ngSubmit)="saveCita()">
+    <!-- Campo: Psicólogo -->
+    <div class="mb-4">
+      <label for="id_psicologo" class="block text-sm font-medium">Psicólogo</label>
+      <input
+        type="number"
+        id="id_psicologo"
+        formControlName="id_psicologo"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-opacity-50"
+        placeholder="ID del Psicólogo"
+      />
+    </div>
+
+    <!-- Campo: Alumno -->
+    <div class="mb-4">
+      <label for="id_alumno" class="block text-sm font-medium">Alumno</label>
+      <input
+        type="text"
+        id="id_alumno"
+        formControlName="id_alumno"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+        placeholder="ID del Alumno"
+
+      />
+    </div>
+
+    <!-- Campo: Consultorio -->
+    <div class="mb-4">
+      <label for="id_consultorio" class="block text-sm font-medium">Consultorio</label>
+      <input
+        type="number"
+        id="id_consultorio"
+        formControlName="id_consultorio"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-opacity-50"
+        placeholder="ID del Consultorio"
+      />
+    </div>
+
+    <!-- Campo: Horario -->
+    <div class="mb-4">
+      <label for="id_horario" class="block text-sm font-medium">Horario</label>
+      <input
+        type="number"
+        id="id_horario"
+        formControlName="id_horario"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-opacity-50"
+        placeholder="ID del Horario"
+      />
+    </div>
+
+    <!-- Campo: Motivo -->
+    <div class="mb-4">
+      <label for="motivo" class="block text-sm font-medium">Motivo</label>
+      <textarea
+        id="motivo"
+        formControlName="motivo"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-opacity-50"
+        placeholder="Describe brevemente el motivo"
+      ></textarea>
+    </div>
+
+    <!-- Campo: Correo -->
+    <div class="mb-4">
+      <label for="correo" class="block text-sm font-medium">Correo</label>
+      <input
+        type="email"
+        id="correo"
+        formControlName="correo"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-opacity-50"
+        placeholder="Correo electrónico"
+      />
+    </div>
+
+    <!-- Botón de Enviar -->
+    <div class="text-center">
+      <button
+        type="submit"
+        class="bg-blue-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring"
+      >
+        Solicitar Cita
+      </button>
+    </div>
+  </form>
+</div>

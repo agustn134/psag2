@@ -13,9 +13,7 @@ class CitasRoutes {
     config() {
         this.router.get('/', citasController_1.default.list);
         this.router.get('/:id', citasController_1.default.getOne);
-        // this.router.post('/', citasController.create);
-        // this.router.put('/:id', citasController.update);
-        // this.router.delete('/:id', citasController.delete);
+        this.router.post('/', citasController_1.default.create);
         this.router.put('/:id/status', citasController_1.default.updateStatus);
     }
 }
