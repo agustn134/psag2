@@ -1,92 +1,3 @@
-// import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs';
-// import { User } from '../models/user'; // Importa la interfaz
-// import { Userlog } from '../models/userlog';
-// import { decode } from 'jwt-js-decode';
-
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class UserService {
-//   private apiUrl = 'http://localhost:3000/api'; // URL de tu API
-
-//   constructor(private http: HttpClient) {}
-
-//   // Método para obtener todos los usuarios
-//   getUsers(): Observable<User[]> {
-//     return this.http.get<User[]>(`${this.apiUrl}/login`);
-//   }
-
-//   // Método para obtener un usuario por ID
-//   getUserById(id: number): Observable<User> {
-//     return this.http.get<User>(`${this.apiUrl}/login/${id}`);
-//   }
-
-//   saveUser(user: User): Observable<User> {
-//     return this.http.post<User>(`${this.apiUrl}/login`, user);
-//   }
-
-//   // Método para actualizar un usuario
-//   updateUser(id: number, user: User): Observable<User> {
-//     return this.http.put<User>(`${this.apiUrl}/login/${id}`, user);
-//   }
-
-//   // Método para crear un nuevo usuario
-//   createUser(user: User): Observable<User> {
-//     return this.http.post<User>(`${this.apiUrl}/login/`, user);
-//   }
-
-//   deleteUser(id: number): Observable<void> {
-//     return this.http.delete<void>(`${this.apiUrl}/user/${id}`);
-//   }
-
-//   createUserByAdmin(user: User): Observable<User> {
-//     return this.http.post<User>(`${this.apiUrl}/user`, user);
-//   }
-
-//   // Método para crear un nuevo usuario  string es para el token
-//   loginUser(userlog: Userlog): Observable<string> {
-//     return this.http.post<string>(`${this.apiUrl}/login/login`, userlog);
-//   }
-
-//   getUserIdFromToken(): number | null {
-//     const token = localStorage.getItem('token');
-//     if (!token) {
-//       console.log('Token no encontrado');
-//       return null;
-//     }
-
-//     try {
-//       const decodedToken = decode(token);
-//       const userId = decodedToken.payload['id']; // Verifica si 'id' es el campo correcto
-//       return userId;
-//     } catch (error) {
-//       console.error('Error al decodificar el token:', error);
-//       return null;
-//     }
-//   }
-
-//   getUserProfile(): Observable<User> {
-//     const userId = this.getUserIdFromToken();
-//     if (userId !== null) {
-//       return this.getUserById(userId);
-//     } else {
-//       throw new Error('No se pudo obtener el ID de usuario desde el token.');
-//     }
-//   }
-
-
-
-// }
-
-
-
-
-
-
-
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -98,7 +9,6 @@ import { decode } from 'jwt-js-decode'; // Importa para decodificar el token JWT
   providedIn: 'root',
 })
 export class UserService {
-
   private apiUrl = 'http://localhost:3000/api'; // URL base de tu API
 
   constructor(private http: HttpClient) {}
@@ -111,6 +21,11 @@ export class UserService {
    */
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}/login`);
+  }
+
+  // Obtener todos los psicólogos (usuarios con id_rol = 2)
+  getPsychologists(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/user/psychologists`);
   }
 
   /**
@@ -192,7 +107,7 @@ export class UserService {
 
     try {
       const decodedToken = decode(token);
-      const userId = decodedToken.payload['id']; // Verifica si 'id' es el campo correcto
+      const userId = decodedToken.payload['id'];
       return userId;
     } catch (error) {
       console.error('Error al decodificar el token:', error);
@@ -213,23 +128,19 @@ export class UserService {
     }
   }
 
-      /**
-     * Obtiene todas las carreras de la API.
-     * @returns Un Observable que emite una lista de carreras.
-     */
-    getCarreras(): Observable<any[]> {
-      return this.http.get<any[]>(`${this.apiUrl}/user/carreras`);
-    }
+  /**
+   * Obtiene todas las carreras de la API.
+   * @returns Un Observable que emite una lista de carreras.
+   */
+  getCarreras(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/user/carreras`);
+  }
 
-    /**
-    * Obtiene todos los roles de la API.
-    * @returns Un Observable que emite una lista de roles.
-    */
-    getRoles(): Observable<any[]> {
-      return this.http.get<any[]>(`${this.apiUrl}/user/roles`);
-    }
-
-
-
-
+  /**
+   * Obtiene todos los roles de la API.
+   * @returns Un Observable que emite una lista de roles.
+   */
+  getRoles(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/user/roles`);
+  }
 }

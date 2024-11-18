@@ -19,15 +19,22 @@ class UserController {
     // Obtener todos los usuarios
     list(req, resp) {
         return __awaiter(this, void 0, void 0, function* () {
-            const users = yield database_1.default.query('SELECT * FROM tb_usuarios');
+            const users = yield database_1.default.query("SELECT * FROM tb_usuarios");
             resp.json(users);
+        });
+    }
+    // Obtener todos los psicólogos (usuarios con id_rol = 2)
+    getPsychologists(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const psychologists = yield database_1.default.query('SELECT id_usuario, nombre FROM tb_usuarios WHERE id_rol = 2');
+            res.json(psychologists);
         });
     }
     // Obtener un usuario por su ID
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id_usuario } = req.params;
-            const users = yield database_1.default.query('SELECT * FROM tb_usuarios WHERE id_usuario = ?', [id_usuario]);
+            const users = yield database_1.default.query("SELECT * FROM tb_usuarios WHERE id_usuario = ?", [id_usuario]);
             if (users.length > 0) {
                 res.json(users[0]);
             }
@@ -39,11 +46,11 @@ class UserController {
     create(req, resp) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { password, e_mail, nombre, ape_paterno, ape_materno, telefono, grupo, id_carrera, id_rol, imagen_url } = req.body;
+                const { password, e_mail, nombre, ape_paterno, ape_materno, telefono, grupo, id_carrera, id_rol, imagen_url, } = req.body;
                 // Verificar si el correo electrónico ya está registrado
-                const existingUser = yield database_1.default.query('SELECT * FROM tb_usuarios WHERE e_mail = ?', [e_mail]);
+                const existingUser = yield database_1.default.query("SELECT * FROM tb_usuarios WHERE e_mail = ?", [e_mail]);
                 if (existingUser.length > 0) {
-                    resp.status(400).json({ message: 'Email already exists' });
+                    resp.status(400).json({ message: "Email already exists" });
                 }
                 // Generar el hash de la contraseña usando bcrypt
                 const saltRounds = 10;
@@ -66,29 +73,29 @@ class UserController {
                     imagen_url,
                 };
                 // Insertar el nuevo usuario en la base de datos
-                yield database_1.default.query('INSERT INTO tb_usuarios SET ?', [newUser]);
+                yield database_1.default.query("INSERT INTO tb_usuarios SET ?", [newUser]);
                 // Configuración de Nodemailer
                 const transporter = nodemailer_1.default.createTransport({
-                    service: 'gmail',
+                    service: "gmail",
                     auth: {
-                        user: 'psicoaguilassoporte@gmail.com', // Tu correo
-                        pass: 'yqxg asgq kiin rojl' // Usa la contraseña de aplicación aquí
+                        user: "psicoaguilassoporte@gmail.com", // Tu correo
+                        pass: "yqxg asgq kiin rojl", // Usa la contraseña de aplicación aquí
                     },
                 });
                 // Opciones del correo
                 const mailOptions = {
-                    from: 'psicoaguilassoporte@gmail.com', // Tu correo
+                    from: "psicoaguilassoporte@gmail.com", // Tu correo
                     to: e_mail, // Correo del nuevo usuario
-                    subject: 'Registro Exitoso',
-                    text: `Hola ${nombre},\n\nGracias por registrarte. Tu contraseña es: ${password}\n\nSaludos, Equipo de Soporte`
+                    subject: "Registro Exitoso",
+                    text: `Hola ${nombre},\n\nGracias por registrarte. Tu contraseña es: ${password}\n\nSaludos, Equipo de Soporte`,
                 };
                 // Enviar el correo
                 yield transporter.sendMail(mailOptions);
-                resp.json({ message: 'User created and email sent' });
+                resp.json({ message: "User created and email sent" });
             }
             catch (error) {
-                console.error('Error al crear usuario:', error);
-                resp.status(500).json({ message: 'Error al crear el usuario' });
+                console.error("Error al crear usuario:", error);
+                resp.status(500).json({ message: "Error al crear el usuario" });
             }
         });
     }
@@ -96,28 +103,33 @@ class UserController {
     put(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id_usuario } = req.params;
-            yield database_1.default.query('UPDATE tb_usuarios SET ? WHERE id_usuario = ?', [req.body, id_usuario]);
-            res.json({ message: 'User updated' });
+            yield database_1.default.query("UPDATE tb_usuarios SET ? WHERE id_usuario = ?", [
+                req.body,
+                id_usuario,
+            ]);
+            res.json({ message: "User updated" });
         });
     }
     // Eliminar un usuario
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id_usuario } = req.params;
-            yield database_1.default.query('DELETE FROM tb_usuarios WHERE id_usuario = ?', [id_usuario]);
-            res.json({ message: 'User deleted' });
+            yield database_1.default.query("DELETE FROM tb_usuarios WHERE id_usuario = ?", [
+                id_usuario,
+            ]);
+            res.json({ message: "User deleted" });
         });
     }
     // Obtener todas las carreras
     getCarreras(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const carreras = yield database_1.default.query('SELECT * FROM tb_carreras');
+                const carreras = yield database_1.default.query("SELECT * FROM tb_carreras");
                 res.json(carreras);
             }
             catch (error) {
-                console.error('Error al obtener carreras:', error);
-                res.status(500).json({ message: 'Error al obtener las carreras' });
+                console.error("Error al obtener carreras:", error);
+                res.status(500).json({ message: "Error al obtener las carreras" });
             }
         });
     }
@@ -125,12 +137,12 @@ class UserController {
     getRoles(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const roles = yield database_1.default.query('SELECT * FROM tb_roles');
+                const roles = yield database_1.default.query("SELECT * FROM tb_roles");
                 res.json(roles);
             }
             catch (error) {
-                console.error('Error al obtener roles:', error);
-                res.status(500).json({ message: 'Error al obtener los roles' });
+                console.error("Error al obtener roles:", error);
+                res.status(500).json({ message: "Error al obtener los roles" });
             }
         });
     }

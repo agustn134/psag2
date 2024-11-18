@@ -16,7 +16,7 @@ class ConsultorioController {
             return res.json(consultorio[0]);
         }
         res.status(404).json({ message: 'Consultorio no encontrado' }); // Mensaje correcto cuando no se encuentra el consultorio
-    }
+    } 
 
     public async create (req: Request, res: Response): Promise<void> {
         await pool.query('INSERT INTO tb_consultorio SET ?', [req.body]);
