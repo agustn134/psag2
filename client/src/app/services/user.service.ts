@@ -104,16 +104,23 @@ export class UserService {
       console.log('Token no encontrado');
       return null;
     }
-
     try {
       const decodedToken = decode(token);
       const userId = decodedToken.payload['id'];
+      const id_rol = decodedToken.payload['rol'];
+
+
+      console.log('ID de usuario extraído del token:', userId);
+      console.log('Rol del usuario extraído del token:', id_rol);
       return userId;
+      return id_rol;
     } catch (error) {
       console.error('Error al decodificar el token:', error);
       return null;
     }
   }
+
+
 
   /**
    * Obtiene el perfil del usuario autenticado usando su ID extraído del token.

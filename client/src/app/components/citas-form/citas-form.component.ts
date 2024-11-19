@@ -5,6 +5,7 @@ import { CitaService } from '../../services/cita.service';
 import { Router } from '@angular/router';
 import { ConsultorioService } from '../../services/consultorio.service';
 import { HorarioService } from '../../services/horario.service';
+import { decode } from 'jwt-js-decode'; // Importa para decodificar el token JWT
 
 @Component({
   selector: 'app-citas-form',
@@ -67,8 +68,6 @@ export class CitasFormComponent implements OnInit {
       this.horarios = data; // Asignar los psicólogos obtenidos a la variable
     });
 
-
-
   }
 
   // Método para guardar la cita
@@ -101,6 +100,31 @@ export class CitasFormComponent implements OnInit {
       this.showToast = false;
     }, 3000);
   }
+
+
+/**
+   * Obtiene el ID del usuario decodificando el token JWT almacenado en el localStorage.
+   * @returns El ID del usuario si se encuentra el token, o null si no existe.
+   */
+getUserIdFromToken(): number | null {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    console.log('Token no encontrado');
+    return null;
+  }
+  try {
+    const decodedToken = decode(token);
+    const userId = decodedToken.payload['id'];
+    return userId;
+  } catch (error) {
+    console.error('Error al decodificar el token:', error);
+    return null;
+  }
+}
+
+
+
+
 }
 
 

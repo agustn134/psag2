@@ -18,6 +18,8 @@ import { CallbackComponent } from './components/callback/callback.component';
 import { PlusPsychologyComponent } from './components/plus-psychology/plus-psychology.component';
 import { CitasComponent } from './components/citas/citas.component';
 import { CitasFormComponent } from './components/citas-form/citas-form.component';
+import { ConferenceComponent } from './components/conference/conference.component';
+import { ConferencePrivComponent } from './components/conference-priv/conference-priv.component';
 
 
 const routes: Routes = [
@@ -41,6 +43,8 @@ const routes: Routes = [
   { path: 'plus-psychology', component: PlusPsychologyComponent},
   { path: 'citas', component: CitasComponent},
   { path: 'citas/add', component: CitasFormComponent},
+  { path: 'conference', component: ConferenceComponent},
+  { path: 'presentar', component: ConferencePrivComponent}
 
 ];
 
