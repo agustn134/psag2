@@ -104,10 +104,10 @@ export class UserService {
       console.log('Token no encontrado');
       return null;
     }
-    try {
+      try {
       const decodedToken = decode(token);
       const userId = decodedToken.payload['id'];
-      const id_rol = decodedToken.payload['rol'];
+        const id_rol = decodedToken.payload['rol'];
       console.log('ID de usuario extraído del token:', userId);
       console.log('Rol del usuario extraído del token:', id_rol);
       return userId;
@@ -117,6 +117,26 @@ export class UserService {
       return null;
     }
   }
+
+  getUserDetailsFromToken(): { id_usuario: number; id_rol: number } | null {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.log('Token no encontrado');
+      return null;
+    }
+    try {
+      const decodedToken = decode(token);
+      const userId = decodedToken.payload['id'];
+      const userRole = decodedToken.payload['rol'];
+      console.log('ID de usuario extraído del token:', userId);
+      console.log('Rol del usuario extraído del token:', userRole);
+      return { id_usuario: userId, id_rol: userRole };
+    } catch (error) {
+      console.error('Error al decodificar el token:', error);
+      return null;
+    }
+  }
+
 
 
 

@@ -22,19 +22,52 @@ export class CitasComponent implements OnInit {
     private consultorioService: ConsultorioService
   ) {}
 
+  // ngOnInit(): void {
+  //   this.obtenerCitas();
+  //   // Obtener la lista de psicólogos desde el backend
+  //   this.userService.getPsychologists().subscribe((data) => {
+  //     this.psicologos = data; // Asignar los psicólogos obtenidos a la variable
+  //   });
+
+  //   // Obtener la lista de consultorios desde el backend
+  //   this.consultorioService.getConsultorios().subscribe((data) => {
+  //     this.consultorios = data; // Asignar los psicólogos obtenidos a la variable
+  //   });
+
+  // }
+
   ngOnInit(): void {
-    this.obtenerCitas();
-    // Obtener la lista de psicólogos desde el backend
-    this.userService.getPsychologists().subscribe((data) => {
-      this.psicologos = data; // Asignar los psicólogos obtenidos a la variable
-    });
+    const userDetails = this.userService.getUserDetailsFromToken();
 
-    // Obtener la lista de consultorios desde el backend
-    this.consultorioService.getConsultorios().subscribe((data) => {
-      this.consultorios = data; // Asignar los psicólogos obtenidos a la variable
-    });
+    if (userDetails) {
+      const { id_usuario, id_rol } = userDetails;
 
+      if (id_rol === 1) {
+        // Si es un alumno, obtener citas por id_alumno
+        this.citaService.getCitasByAlumno(id_usuario).subscribe(
+          (citas) => (this.citas = citas),
+          (err) => console.error('Error obteniendo citas para alumno:', err)
+        );
+      } else if (id_rol === 2) {
+        // Si es un psicólogo, obtener citas por id_psicologo
+        this.citaService.getCitasByPsicologo(id_usuario).subscribe(
+          (citas) => (this.citas = citas),
+          (err) => console.error('Error obteniendo citas para psicólogo:', err)
+        );
+      } else {
+        // Rol diferente o no reconocido
+        console.warn('Rol de usuario no reconocido:', id_rol);
+      }
+    } else {
+      console.error('Detalles del usuario no disponibles. Redirigiendo...');
+      // Maneja redirección a login o error
+    }
+
+    // Cargar psicólogos y consultorios
+    this.userService.getPsychologists().subscribe((data) => (this.psicologos = data));
+    this.consultorioService.getConsultorios().subscribe((data) => (this.consultorios = data));
   }
+
 
   obtenerCitas(): void {
     this.citaService.getCitas().subscribe(

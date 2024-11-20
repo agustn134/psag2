@@ -21,15 +21,16 @@ export class CitaService {
     return this.http.get<cita>(`${this.API_URI}/citas/${id}`);
   }
 
-  // Obtener citas por id_psicologo
-  getCitasByPsicologo(id_psicologo: string): Observable<cita[]> {
-    return this.http.get<cita[]>(`${this.API_URI}/citas/psicologo/${id_psicologo}`);
-  }
-
   // Obtener citas por id_alumno
-  getCitasByAlumno(id_alumno: string): Observable<cita[]> {
-    return this.http.get<cita[]>(`${this.API_URI}/citas/alumno/${id_alumno}`);
-  }
+getCitasByAlumno(id_alumno: number): Observable<cita[]> {
+  return this.http.get<cita[]>(`${this.API_URI}/citas/alumno/${id_alumno}`);
+}
+
+// Obtener citas por id_psicologo
+getCitasByPsicologo(id_psicologo: number): Observable<cita[]> {
+  return this.http.get<cita[]>(`${this.API_URI}/citas/psicologo/${id_psicologo}`);
+}
+
 
   // Eliminar una cita
   deleteCita(id: string): Observable<any> {
