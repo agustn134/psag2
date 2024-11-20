@@ -108,8 +108,6 @@ export class UserService {
       const decodedToken = decode(token);
       const userId = decodedToken.payload['id'];
       const id_rol = decodedToken.payload['rol'];
-
-
       console.log('ID de usuario extraído del token:', userId);
       console.log('Rol del usuario extraído del token:', id_rol);
       return userId;
