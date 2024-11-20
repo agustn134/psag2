@@ -1,7 +1,32 @@
-<p>plus-psychology works!</p>
-<div *ngIf="showDetails">
-  <h2>{{ showDetails.name }}</h2>
-  <img [src]="showDetails.images[0]?.url" alt="{{ showDetails.name }}" />
-  <p>{{ showDetails.description }}</p>
-  <a [href]="showDetails.external_urls.spotify" target="_blank">Escuchar en Spotify</a>
+<div class="container mx-auto mt-10 p-6 bg-white dark:bg-zinc-800 rounded-lg shadow-md text-center">
+  <!-- Encabezado -->
+  <h1 class="text-2xl font-bold text-zinc-800 dark:text-white mb-4">Podcast sobre Psicología!</h1>
+
+  <!-- Contenido del podcast -->
+  <div *ngIf="showDetails" class="flex flex-col items-center">
+    <!-- Imagen del podcast -->
+    <img
+      [src]="showDetails.images[0]?.url"
+      [alt]="showDetails.name"
+      class="w-48 h-48 object-cover rounded-lg shadow-md mb-6"
+    />
+
+    <!-- Título del podcast -->
+    <h2 class="text-xl font-semibold text-zinc-800 dark:text-white mb-3">
+      {{ showDetails.name }}
+    </h2>
+
+    <!-- Descripción del podcast -->
+    <p class="text-sm text-zinc-600 dark:text-zinc-300 mb-5 max-w-lg">
+      {{ showDetails.description }}
+    </p>
+
+    <!-- Enlace a Spotify -->
+    <a
+      [href]="showDetails.external_urls.spotify"
+      target="_blank"
+      class="inline-block bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-6 rounded-lg shadow-md transition-all">
+      Escuchar en Spotify
+    </a>
+  </div>
 </div>

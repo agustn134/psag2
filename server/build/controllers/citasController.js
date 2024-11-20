@@ -1,5 +1,4 @@
 "use strict";
-// // import { Request, Response } from "express";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -14,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
-const nodemailer_1 = __importDefault(require("nodemailer")); // Importar Nodemailer
+const nodemailer_1 = __importDefault(require("nodemailer"));
 class CitasController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -147,6 +146,42 @@ class CitasController {
             catch (error) {
                 console.error("Error en create:", error);
                 res.status(500).json({ message: "Error interno al crear la cita." });
+            }
+        });
+    }
+    getByPsicologo(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { id_psicologo } = req.params;
+                const citas = yield database_1.default.query(`
+            SELECT c.*, p.nombre AS psicologo, a.nombre AS alumno
+            FROM tb_citas c
+            JOIN tb_usuarios p ON c.id_psicologo = p.id_usuario
+            JOIN tb_usuarios a ON c.id_alumno = a.id_usuario
+            WHERE c.id_psicologo = ?`, [id_psicologo]);
+                res.json(citas);
+            }
+            catch (error) {
+                console.error("Error en getByPsicologo:", error);
+                res.status(500).json({ message: "Error al obtener citas por psicólogo." });
+            }
+        });
+    }
+    getByAlumno(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { id_alumno } = req.params;
+                const citas = yield database_1.default.query(`
+            SELECT c.*, p.nombre AS psicologo, a.nombre AS alumno
+            FROM tb_citas c
+            JOIN tb_usuarios p ON c.id_psicologo = p.id_usuario
+            JOIN tb_usuarios a ON c.id_alumno = a.id_usuario
+            WHERE c.id_alumno = ?`, [id_alumno]);
+                res.json(citas);
+            }
+            catch (error) {
+                console.error("Error en getByAlumno:", error);
+                res.status(500).json({ message: "Error al obtener citas por alumno." });
             }
         });
     }
