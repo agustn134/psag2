@@ -126,26 +126,29 @@ export class CitasComponent implements OnInit {
   getPsychologistssendemail(): void {
     this.userService.getPsychologistsAndSendEmail().subscribe({
       next: (data) => {
-        this.psychologists = data; // Guarda los datos de los psicólogos
-        console.log(data); // Verifica la respuesta aquí
-        // Mostrar mensaje de éxito con Toastr
+        this.psychologists = data; // Actualiza los datos obtenidos
+        console.log(data);
         this.toastr.success(
-          'El Psicologo fue notificado, el correo fue enviado.',
-          'Correo Enviado al Psicologo'
+          'El Psicólogo fue notificado, el correo fue enviado.',
+          'Correo Enviado al Psicólogo'
+        );
+  
+        // Navegación segura
+        this.router.navigate(['/conference']).catch((err) =>
+          console.error('Error al redirigir a la conferencia:', err)
         );
       },
       error: (err) => {
-        console.error('Error al obtener psicólogos:', err);
-        // Mostrar mensaje de error con Toastr
+        console.error('Error al enviar notificación:', err);
         this.toastr.error(
-          'Hubo un error al enviar notificación y no se envio el correo.',
-          'Error Enviar Correo al psicologo'
+          'Hubo un error al enviar notificación y no se envió el correo.',
+          'Error Enviar Correo al Psicólogo'
         );
       },
     });
   }
-
 }
+  
   // ///servicio al hacer clic en el botón de enviar correo para el conferenciante
   //   redirectToConference() {
   //     this.userService.getPsychologistsAndSendEmail().subscribe(

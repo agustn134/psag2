@@ -1,5 +1,8 @@
-<div>
-  <h1>Conferencia en vivo</h1>
-  <div id="call-container"></div>
-  <button (click)="leaveCall()" class="btn btn-danger">Salir</button>
+<div class="conference-container">
+  <h1 class="conference-title">Conferencia en Vivo</h1>
+  <div id="call-container" class="call-frame"></div>
+  <p id="error-message" *ngIf="!callFrame" class="text-red-500">
+    Error: No se pudo inicializar la conferencia. Por favor, recarga la página.
+  </p>
+  <button (click)="leaveCall()" class="btn-leave">Salir</button>
 </div>

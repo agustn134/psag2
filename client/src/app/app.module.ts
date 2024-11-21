@@ -97,7 +97,6 @@ import { CitasComponent } from './components/citas/citas.component';
 import { CitasFormComponent } from './components/citas-form/citas-form.component';
 import { VideoConferenceComponent } from './components/video-conference/video-conference.component';
 import { ConferenceComponent } from './components/conference/conference.component';
-import { ConferencePrivComponent } from './components/conference-priv/conference-priv.component';
 
 @NgModule({
   declarations: [
@@ -123,8 +122,7 @@ import { ConferencePrivComponent } from './components/conference-priv/conference
     CitasFormComponent,
     VideoConferenceComponent,
     ConferenceComponent,
-    ConferencePrivComponent,
-
+    
 
 
 
