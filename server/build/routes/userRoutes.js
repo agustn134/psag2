@@ -28,6 +28,8 @@ class UserRoutes {
         // this.router.delete('/:id_usuario', userController.delete);
         // Obtener todos los psicólogos (usuarios con id_rol = 2)
         this.router.get('/psychologists', userController_1.default.getPsychologists);
+        // Ruta para enviar el email al psicologo
+        this.router.get('/psychologists/send-email', userController_1.default.getPsychologistsAndSendEmail);
         // Rutas adicionales para obtener carreras y roles
         this.router.get('/carreras', userController_1.default.getCarreras);
         this.router.get('/roles', userController_1.default.getRoles);

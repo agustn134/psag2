@@ -1,5 +1,4 @@
 
-
 <!-- Primero Hagamos todo el funcionamiento basico de aceptar y cancelar la cita en el Backend
 
 1. Actualizar el estado de la cita de la base de datos
@@ -9,12 +8,8 @@
 
 4. Revisar el modelo de la cita y el servicio de la cita
 5. Revisar los id de la tabla de la cita
-
-
-
 -->
 <div class="container mx-auto mt-10 p-4 bg-white dark:bg-zinc-800 rounded-lg shadow-md">
-  <!-- Encabezado -->
   <h2 class="text-3xl font-semibold text-zinc-800 dark:text-white mb-6 text-center">
     Listado de Citas
   </h2>
@@ -54,6 +49,7 @@
           <td class="px-4 py-3 text-sm text-zinc-700 dark:text-zinc-200">{{ cita.estatus }}</td>
           <td class="px-4 py-3 text-sm text-zinc-700 dark:text-zinc-200 text-center">
             <!-- Botones -->
+            <div *ngIf="idRol !== 1">
             <button
               class="bg-gray-500 hover:bg-green-600 text-white font-medium py-1 px-3 rounded-full transition-colors mr-2"
               (click)="actualizarEstatus(cita.id_cita!, 'Aceptada')">
@@ -64,6 +60,7 @@
               (click)="actualizarEstatus(cita.id_cita!, 'Rechazada')">
               Cancelar
             </button>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -72,19 +69,16 @@
 </div>
 
 <div class="container mx-auto mt-10 p-6 bg-white dark:bg-zinc-800 rounded-lg shadow-md">
-  <!-- Encabezado -->
   <h2 class="text-3xl font-semibold text-zinc-800 dark:text-white mb-8 text-center">
-    Psicólogos Disponibles
+    Psicólogos
   </h2>
-
   <!-- Cards dinámicas -->
   <div class="flex flex-wrap justify-center gap-6">
     <div
-      *ngFor="let psicologo of psicologos"
+    *ngFor="let psychologist of psychologists"
       class="w-72 bg-white dark:bg-zinc-700 rounded-xl shadow-lg p-6 group hover:shadow-2xl transition-shadow">
       <div class="text-center">
         <div class="text-gray-500 dark:text-gray-400 group-hover:scale-105 transition-all">
-          <!-- Icono o Imagen -->
           <svg class="w-16 h-16 mx-auto" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <path
@@ -94,32 +88,32 @@
         </div>
         <!-- Nombre del psicólogo -->
         <h3 class="mt-4 text-lg font-semibold text-zinc-700 dark:text-white">
-          {{ psicologo.nombre }}
+          {{ psychologist.nombre }}
         </h3>
         <!-- Descripción del psicólogo -->
         <p class="text-sm text-gray-500 dark:text-gray-400">
-          {{ psicologo.especialidad || 'Psicólogo General' }}
+          'Psicólogo General'
+          <br />
+          {{ psychologist.e_mail }}
         </p>
       </div>
       <div class="flex justify-center mt-4 space-x-3">
-        <!-- Botón de contacto -->
-        <a
-          [href]="'mailto:' + psicologo.correo"
-          class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full shadow-md transition-transform transform hover:scale-110">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <div class="flex gap-3 text-2xl bg-gray-700 text-white p-1 hover:p-2 transition-all duration-500 delay-200 rounded-full shadow-sm">
+        <a class="hover:scale-110 transition-all duration-500 delay-200">
+        </a>
+        <a routerLink="/conference" (click)="getPsychologistssendemail()" class="hover:scale-110 transition-all duration-500 delay-200">
+          <svg width="1em" height="1em" viewBox="0 0 24 24" stroke="currentColor" fill="none">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
             <path d="M22 6l-10 7L2 6"></path>
           </svg>
         </a>
-        <!-- Botón para unirse a videoconferencia -->
-        <a
-          routerLink="/conference"
-          class="bg-green-500 hover:bg-green-600 text-white p-2 rounded-full shadow-md transition-transform transform hover:scale-110">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M12 8v8"></path>
-          </svg>
+        <a class="hover:scale-110 transition-all duration-500 delay-200">
         </a>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+
+ <!-- Botón para redireccionarse a /conference y enviar con nodemailer correo al correo del psicólogo -->

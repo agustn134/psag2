@@ -183,6 +183,71 @@ public async getByAlumno(req: Request, res: Response): Promise<void> {
     }
 }
 
+
+    //Enviar correos usando Nodemailer
+public async sendConferenceMail(req: Request, res: Response): Promise<void> {
+  try {
+      // Obtener correos de los psicólogos
+      const correos = await pool.query(
+          "SELECT e_mail FROM tb_usuarios WHERE id_rol = 2"
+      );
+
+      if (correos.length === 0) {
+          res.status(404).json({ message: "No se encontraron correos de psicólogos." });
+          return;
+      }
+
+      // Configuración de Nodemailer
+      const transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+              user: "psicoaguilassoporte@gmail.com",
+              pass: "ilhj qwju tiij vbby",
+          },
+      });
+
+      // Enviar correo a cada psicólogo
+      const promesasEnvio = correos.map((usuario: any) => {
+          const mailOptions = {
+              from: "psicoaguilassoporte@gmail.com",
+              to: usuario.correo,
+              subject: "Nueva Conferencia Programada",
+              text: "Se ha programado una nueva conferencia. Por favor, revisa los detalles.",
+          };
+          return transporter.sendMail(mailOptions);
+      });
+
+      // Esperar todos los envíos
+      await Promise.all(promesasEnvio);
+
+      res.json({ message: "Correos enviados exitosamente." });
+  } catch (error) {
+      console.error("Error al enviar correos:", error);
+      res.status(500).json({ message: "Error interno al enviar correos." });
+  }
+}
+
+
+public async getEmailsByRole(req: Request, res: Response): Promise<void> {
+  try {
+      const emails = await pool.query(
+          "SELECT e_mail, id_usuario, id_rol, nombre FROM tb_usuarios WHERE id_rol = 2"
+      );
+
+      if (emails.length > 0) {
+          res.json(emails);
+      } else {
+          res.status(404).json({ message: "No se encontraron correos con id_rol = 2." });
+      }
+  } catch (error) {
+      console.error("Error en getEmailsByRole:", error);
+      res.status(500).json({ message: "Error al obtener los correos." });
+  }
+}
+
+
+
+
   
 }
 

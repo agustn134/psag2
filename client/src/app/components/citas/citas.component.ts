@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CitaService } from '../../services/cita.service';
 import { cita } from '../../models/cita';
 import { ToastrService } from 'ngx-toastr'; // Asegúrate de importar ToastrService
 import { UserService } from '../../services/user.service';
 import { ConsultorioService } from '../../services/consultorio.service';
+
 
 @Component({
   selector: 'app-citas',
@@ -14,33 +16,27 @@ export class CitasComponent implements OnInit {
   citas: cita[] = [];
   psicologos: any[] = []; // Lista de psicólogos
   consultorios: any[] = []; // Lista de
+  psychologists: any[] = [];
+  loading = true;
+  idRol: number | null = null; // Propiedad para almacenar el rol del usuario
+
 
   constructor(
     private citaService: CitaService,
     private toastr: ToastrService,
     private userService: UserService,
-    private consultorioService: ConsultorioService
+    private consultorioService: ConsultorioService,
+    private router: Router
   ) {}
 
-  // ngOnInit(): void {
-  //   this.obtenerCitas();
-  //   // Obtener la lista de psicólogos desde el backend
-  //   this.userService.getPsychologists().subscribe((data) => {
-  //     this.psicologos = data; // Asignar los psicólogos obtenidos a la variable
-  //   });
 
-  //   // Obtener la lista de consultorios desde el backend
-  //   this.consultorioService.getConsultorios().subscribe((data) => {
-  //     this.consultorios = data; // Asignar los psicólogos obtenidos a la variable
-  //   });
-
-  // }
 
   ngOnInit(): void {
     const userDetails = this.userService.getUserDetailsFromToken();
 
     if (userDetails) {
       const { id_usuario, id_rol } = userDetails;
+      this.idRol = id_rol; // Asignar el id_rol del usuario actual
 
       if (id_rol === 1) {
         // Si es un alumno, obtener citas por id_alumno
@@ -54,20 +50,43 @@ export class CitasComponent implements OnInit {
           (citas) => (this.citas = citas),
           (err) => console.error('Error obteniendo citas para psicólogo:', err)
         );
-      } else {
+      } else if (id_rol === 3) {
         // Rol diferente o no reconocido
-        console.warn('Rol de usuario no reconocido:', id_rol);
+        this.citaService.getCitas().subscribe(
+          (citas) => (this.citas = citas),
+          (err) => console.error('Error obteniendo citas para psicólogo:', err)
+        );
       }
     } else {
       console.error('Detalles del usuario no disponibles. Redirigiendo...');
       // Maneja redirección a login o error
     }
 
-    // Cargar psicólogos y consultorios
-    this.userService.getPsychologists().subscribe((data) => (this.psicologos = data));
-    this.consultorioService.getConsultorios().subscribe((data) => (this.consultorios = data));
-  }
+    this.userService.getPsychologists().subscribe({
+      next: (data) => {
+          this.psychologists = data;  // Asegúrate de que 'data' contiene los psicólogos
+          console.log(this.psychologists); // Verifica en la consola los datos recibidos
 
+      },
+      error: (err) => {
+          console.error('Error al obtener psicólogos:', err);
+      },
+      });
+
+    // Cargar psicólogos y consultorios
+    // this.userService
+    //   .getPsychologists()
+    //   .subscribe((data) => (this.psicologos = data));
+    this.consultorioService
+      .getConsultorios()
+      .subscribe((data) => (this.consultorios = data));
+    // // Cargar psicólogos para las cards
+    // this.citaService
+    //   .getEmailsByRole()
+    //   .subscribe((data) => (this.psychologists = data));
+
+
+  }
 
   obtenerCitas(): void {
     this.citaService.getCitas().subscribe(
@@ -104,5 +123,38 @@ export class CitasComponent implements OnInit {
     );
   }
 
-  enviarcorreoEstatus() {}
+  getPsychologistssendemail(): void {
+    this.userService.getPsychologistsAndSendEmail().subscribe({
+      next: (data) => {
+        this.psychologists = data; // Guarda los datos de los psicólogos
+        console.log(data); // Verifica la respuesta aquí
+        // Mostrar mensaje de éxito con Toastr
+        this.toastr.success(
+          'El Psicologo fue notificado, el correo fue enviado.',
+          'Correo Enviado al Psicologo'
+        );
+      },
+      error: (err) => {
+        console.error('Error al obtener psicólogos:', err);
+        // Mostrar mensaje de error con Toastr
+        this.toastr.error(
+          'Hubo un error al enviar notificación y no se envio el correo.',
+          'Error Enviar Correo al psicologo'
+        );
+      },
+    });
+  }
+
 }
+  // ///servicio al hacer clic en el botón de enviar correo para el conferenciante
+  //   redirectToConference() {
+  //     this.userService.getPsychologistsAndSendEmail().subscribe(
+  //         response => {
+  //             console.log('Correo enviado:', response);
+  //             this.router.navigate(['/conference']);
+  //         },
+  //         error => {
+  //             console.error('Error al enviar correos:', error);
+  //         }
+  //     );
+  // }

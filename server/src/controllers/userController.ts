@@ -5,17 +5,145 @@ import jwt from "jsonwebtoken";
 import keys from "../keys";
 import nodemailer from "nodemailer"; // Importar Nodemailer
 class UserController {
+  
   // Obtener todos los usuarios
   public async list(req: Request, resp: Response): Promise<void> {
     const users = await pool.query("SELECT * FROM tb_usuarios");
     resp.json(users);
   }
 
-    // Obtener todos los psicólogos (usuarios con id_rol = 2)
+  // Obtener todos los psicólogos (usuarios con id_rol = 2)
     public async getPsychologists(req: Request, res: Response): Promise<void> {
-    const psychologists = await pool.query('SELECT id_usuario, nombre FROM tb_usuarios WHERE id_rol = 2');
-	res.json(psychologists);
+    const psychologists = await pool.query('SELECT id_usuario, nombre, e_mail FROM tb_usuarios WHERE id_rol = 2');
+    console.log(psychologists); // Verifica que los psicólogos estén siendo enviados
+    res.json(psychologists);
+  }
+
+  // // Obtener todos los psicólogos (usuarios con id_rol = 2)
+  // public async getPsychologistssendemail(req: Request, res: Response): Promise<void> {
+    
+  //   try {
+  //   const psychologists = await pool.query('SELECT id_usuario, nombre, e_mail FROM tb_usuarios WHERE id_rol = 2');
+  //   console.log(psychologists); // Verifica que los psicólogos estén siendo enviados
+  //   res.json(psychologists);
+
+  //   // Configuración de Nodemailer
+  //   const transporter = nodemailer.createTransport({
+  //     service: "gmail",
+  //     auth: {
+  //         user: "psicoaguilassoporte@gmail.com",
+  //         pass: "ilhj qwju tiij vbby",
+  //     },
+  //   });
+
+  //   // Enviar correo a cada psicólogo
+  //   const promesasEnvio = psychologists.map((psychologists: any) => {
+  //   const mailOptions = {
+  //       from: "psicoaguilassoporte@gmail.com",
+  //       to: psychologists.e_mail,
+  //       subject: "Nueva Conferencia Programada",
+  //       text: "Se ha programado una nueva conferencia. Por favor, revisa los detalles.",
+  //   };
+  //   return transporter.sendMail(mailOptions);
+  //    });
+
+  //    // Esperar todos los envíos
+  //    await Promise.all(promesasEnvio);
+
+  //    res.json({ message: "Correos enviados exitosamente." });
+  //   } catch (error) {
+  //     console.error("Error al enviar correos:", error);
+  //     res.status(500).json({ message: "Error interno al enviar correos." });
+  // }
+
+
+  // }
+
+  // // Obtener todos los psicólogos (usuarios con id_rol = 2) y enviar correos
+  // public async getPsychologistsAndSendEmail(req: Request, res: Response): Promise<void> {
+  //   try {
+  //     // Obtener psicólogos desde la base de datos
+  //     const result = await pool.query('SELECT id_usuario, nombre, e_mail FROM tb_usuarios WHERE id_rol = 2');
+  //     const psychologists = result.rows; // Asegúrate de acceder correctamente a los resultados de la consulta
+  //     console.log(psychologists); // Verifica que los psicólogos estén siendo enviados
+
+  //     // Configuración de Nodemailer
+  //     const transporter = nodemailer.createTransport({
+  //       service: "gmail",
+  //       auth: {
+  //         user: "psicoaguilassoporte@gmail.com",
+  //         pass: "ilhjqwuitiijvbby", // Asegúrate de no dejar espacios o caracteres incorrectos
+  //       },
+  //     });
+
+  //     // Enviar correo a cada psicólogo
+  //     const promisesEnvio = psychologists.map((psychologist: any) => {
+  //       const mailOptions = {
+  //         from: "psicoaguilassoporte@gmail.com",
+  //         to: psychologist.e_mail,
+  //         subject: "Nueva Conferencia Programada",
+  //         text: "Se ha programado una nueva conferencia. Por favor, revisa los detalles.",
+  //       };
+
+  //       // Enviar el correo y devolver la promesa
+  //       return transporter.sendMail(mailOptions);
+  //     });
+
+  //     // Esperar todos los envíos de correo
+  //     await Promise.all(promisesEnvio);
+
+  //     // Responder al cliente con un mensaje de éxito
+  //     res.json({ message: "Correos enviados exitosamente." });
+  //   } catch (error) {
+  //     console.error("Error al enviar correos:", error);
+  //     res.status(500).json({ message: "Error interno al enviar correos." });
+  //   }
+  // }
+
+  public async getPsychologistsAndSendEmail(req: Request, res: Response): Promise<void> {
+    try {
+      // Ejecutar consulta y validar estructura
+      const result = await pool.query('SELECT id_usuario, nombre, e_mail FROM tb_usuarios WHERE id_rol = 2');
+      const psychologists = Array.isArray(result) ? result : result[0]; // Ajustar según el formato real
+      console.log(psychologists); // Verifica el resultado
+  
+      if (!psychologists || psychologists.length === 0) {
+         res.status(404).json({ message: "No se encontraron psicólogos." });
+      }
+  
+      // Configuración de Nodemailer
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "psicoaguilassoporte@gmail.com",
+          pass: "yqxg asgq kiin rojl", // Asegúrate de usar una contraseña válida
+        },
+      });
+  
+      // Crear promesas de envío
+      const promisesEnvio = psychologists.map((psychologist: any) => {
+        const mailOptions = {
+          from: "psicoaguilassoporte@gmail.com",
+          to: psychologist.e_mail,
+          subject: "Nueva Conferencia Programada",
+          text: "Se ha solicitado una nueva conferencia. Por favor, revisa los detalles.",
+        };
+        return transporter.sendMail(mailOptions);
+      });
+  
+      // Esperar todos los envíos
+      await Promise.all(promisesEnvio);
+  
+      res.json({ message: "Correos enviados exitosamente." });
+    } catch (error) {
+      console.error("Error al enviar correos:", error);
+      res.status(500).json({ message: "Error interno al enviar correos." });
     }
+  }
+  
+
+
+
 
 
   // Obtener un usuario por su ID

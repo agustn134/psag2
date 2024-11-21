@@ -22,15 +22,16 @@ export class CitaService {
   }
 
   // Obtener citas por id_alumno
-getCitasByAlumno(id_alumno: number): Observable<cita[]> {
-  return this.http.get<cita[]>(`${this.API_URI}/citas/alumno/${id_alumno}`);
-}
+  getCitasByAlumno(id_alumno: number): Observable<cita[]> {
+    return this.http.get<cita[]>(`${this.API_URI}/citas/alumno/${id_alumno}`);
+  }
 
-// Obtener citas por id_psicologo
-getCitasByPsicologo(id_psicologo: number): Observable<cita[]> {
-  return this.http.get<cita[]>(`${this.API_URI}/citas/psicologo/${id_psicologo}`);
-}
-
+  // Obtener citas por id_psicologo
+  getCitasByPsicologo(id_psicologo: number): Observable<cita[]> {
+    return this.http.get<cita[]>(
+      `${this.API_URI}/citas/psicologo/${id_psicologo}`
+    );
+  }
 
   // Eliminar una cita
   deleteCita(id: string): Observable<any> {
@@ -51,7 +52,19 @@ getCitasByPsicologo(id_psicologo: number): Observable<cita[]> {
 
   // Método de actualización del estado
   updateEstatus(id: string, estatus: string): Observable<any> {
-  return this.http.put<any>(`${this.API_URI}/citas/${id}/status`, { estatus });
+    return this.http.put<any>(`${this.API_URI}/citas/${id}/status`, {
+      estatus,
+    });
   }
+
+  sendConferenceMail(): Observable<any> {
+    return this.http.post<any>(`${this.API_URI}/citas/conference`, {});
+  }
+
+  // Obtener correos electrónicos de usuarios con id_rol = 2
+  getEmailsByRole(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.API_URI}/emails/role`);
+  }
+
 
 }

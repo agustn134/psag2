@@ -24,9 +24,16 @@ export class UserService {
   }
 
   // Obtener todos los psicólogos (usuarios con id_rol = 2)
-  getPsychologists(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/user/psychologists`);
-  }
+  // getPsychologists(): Observable<User[]> {
+  //   return this.http.get<User[]>(`${this.apiUrl}/user/psychologists`);
+  // }
+  getPsychologists(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/user/psychologists`);
+}
+
+getPsychologistsAndSendEmail(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.apiUrl}/user/psychologists/send-email`);
+}
 
   /**
    * Obtiene un usuario por su ID desde la API.
