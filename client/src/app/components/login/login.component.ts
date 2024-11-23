@@ -4,7 +4,7 @@ import { Userlog } from '../../models/userlog';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { decode } from 'jwt-js-decode';
+// import { decode } from 'jwt-js-decode';
 
 @Component({
   selector: 'app-login',
@@ -51,7 +51,8 @@ export class LoginComponent implements OnInit {
         console.log('Token guardado:', token);
 
         // Decodificar el token
-        let jwt = decode(token);  // Cambiado para usar el token real
+        // let jwt = decode(token);  // Cambiado para usar el token real
+        let jwt = this.userService['decodeJWT'](token); 
         console.log('Token decodificado:', jwt);  // Mostrar el token decodificado
 
 

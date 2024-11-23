@@ -25,14 +25,16 @@
     "@paypal/paypal-js": "^8.1.2",
     "@types/leaflet": "^1.9.12",
     "@types/leaflet-routing-machine": "^3.2.8",
-    "jwt-js-decode": "^1.8.2",
+    "crypto-browserify": "^3.12.1",
     "leaflet": "^1.7.1",
     "leaflet-routing-machine": "^3.2.12",
     "mapbox-gl": "^3.7.0",
     "ngx-paypal": "^11.0.0",
     "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
+    "stream-browserify": "^3.0.0",
     "tslib": "^2.3.0",
+    "util": "^0.12.5",
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
