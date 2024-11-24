@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import pool from "../database";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import keys from "../keys";
 import nodemailer from "nodemailer"; // Importar Nodemailer

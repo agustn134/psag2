@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
-const bcrypt_1 = __importDefault(require("bcrypt"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const keys_1 = __importDefault(require("../keys"));
 class LoginController {
@@ -53,7 +53,7 @@ class LoginController {
                 }
                 // Generar el hash de la contraseña usando bcrypt
                 const saltRounds = 10;
-                const hashedPassword = yield bcrypt_1.default.hash(password, saltRounds);
+                const hashedPassword = yield bcryptjs_1.default.hash(password, saltRounds);
                 const existingCarrera = yield database_1.default.query("SELECT * FROM tb_carreras WHERE id_carrera = ?", [id_carrera]);
                 if (existingCarrera.length === 0) {
                     resp
@@ -120,7 +120,7 @@ class LoginController {
                 }
                 const user = result[0];
                 // Comparar la contraseña proporcionada por el usuario con la contraseña cifrada almacenada
-                const isMatch = yield bcrypt_1.default.compare(password, user.password);
+                const isMatch = yield bcryptjs_1.default.compare(password, user.password);
                 if (!isMatch) {
                     resp.status(401).json({ message: 'Incorrect password' }); // Cambié el código de estado a 401
                     return;

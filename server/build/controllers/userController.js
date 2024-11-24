@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
-const bcrypt_1 = __importDefault(require("bcrypt"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const nodemailer_1 = __importDefault(require("nodemailer")); // Importar Nodemailer
 class UserController {
     // Obtener todos los usuarios
@@ -160,7 +160,7 @@ class UserController {
                 }
                 // Generar el hash de la contraseña usando bcrypt
                 const saltRounds = 10;
-                const hashedPassword = yield bcrypt_1.default.hash(password, saltRounds);
+                const hashedPassword = yield bcryptjs_1.default.hash(password, saltRounds);
                 const existingCarrera = yield database_1.default.query("SELECT * FROM tb_carreras WHERE id_carrera = ?", [id_carrera]);
                 if (existingCarrera.length === 0) {
                     resp.status(400).json({ message: "La carrera especificada no existe" });
