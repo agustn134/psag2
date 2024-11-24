@@ -179,10 +179,10 @@
 
 /**
     *
-    * Para reemplazar el uso de decode de 'jwt-js-decode' en el servicio UserService con 
-    * la misma lógica manual de decodificación utilizada en AuthService, puedes 
+    * Para reemplazar el uso de decode de 'jwt-js-decode' en el servicio UserService con
+    * la misma lógica manual de decodificación utilizada en AuthService, puedes
     * seguir los siguientes pasos:
-    * 
+    *
     * Cambios Requeridos
 Elimina la dependencia jwt-js-decode:
 
@@ -192,7 +192,7 @@ Incorpora la función de decodificación personalizada:
 Añade la función decodeJWT() usada en el AuthService al UserService.
 Actualiza los métodos que usan decode():
 
-Adapta los métodos como getUserIdFromToken() y getUserDetailsFromToken() para usar la lógica personalizada. 
+Adapta los métodos como getUserIdFromToken() y getUserDetailsFromToken() para usar la lógica personalizada.
     */
 
 
@@ -206,8 +206,9 @@ import { Userlog } from '../models/userlog'; // Importa la interfaz para el logi
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'http://localhost:3000/api'; // URL base de tu API
-
+  // private apiUrl = 'http://localhost:3000/api'; // URL base de tu API
+// API_URI = 'http://localhost:3000/api';
+apiUrl = 'https://psag2.onrender.com/api';
   constructor(private http: HttpClient) {}
 
   /**

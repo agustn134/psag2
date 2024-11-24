@@ -8,7 +8,9 @@ import { Observable } from 'rxjs';
 })
 export class ConsultorioService {
 
-  API_URI = 'http://localhost:3000/api';
+  // API_URI = 'http://localhost:3000/api';
+  API_URI = 'https://psag2.onrender.com/api';
+
 
   constructor( private http: HttpClient) {}
 
