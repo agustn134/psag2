@@ -74,7 +74,11 @@ export class AddTokenInterceptor implements HttpInterceptor {
     const excludedUrls = [
       'https://www.googleapis.com/youtube/v3',
       'https://accounts.spotify.com/authorize',
-      'https://api.daily.co/v1//meeting-tokens'
+      'https://api.spotify.com/v1/browse/categories',
+      'https://sdk.scdn.co/spotify-player.js',
+      'https://api.daily.co/v1//meeting-tokens',
+
+
       // 'https://4200videocall.daily.co/room-conf?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyIjoicm9vbS1jb25mIiwibyI6dHJ1ZSwidm8iOmZhbHNlLCJhbyI6ZmFsc2UsImQiOiJmZGZiZDA2MS1hMDk3LTQzYWItODYzYy1mMWU4OTYyMDc4NGIiLCJpYXQiOjE3MzIwNDg5NDR9.oXcW1-awCb0cIjFA3dGSRHkH0GzeJ5ADiAkn4ywOBwU'
     ];
 

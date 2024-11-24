@@ -10,7 +10,6 @@ export class SpotifyService {
 
   constructor(private http: HttpClient) { }
 
-
   getShow(accessToken: string, showId: string, market: string): Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${accessToken}`
@@ -20,4 +19,44 @@ export class SpotifyService {
     const url = `${this.endpointShow}${showId}?market=${market}`;
     return this.http.get(url, { headers });
   }
+
+  // spotify.service.ts
+getCategoryPlaylists(accessToken: string, categoryId: string, market: string): Observable<any> {
+  const headers = {
+    'Authorization': `Bearer ${accessToken}`
+  };
+  const url = `https://api.spotify.com/v1/browse/categories/${categoryId}/playlists?market=${market}`;
+  return this.http.get(url, { headers });
+}
+
+//Listado de Episodios
+getEpisodes(accessToken: string, showId: string, market: string): Observable<any> {
+  const headers = {
+    'Authorization': `Bearer ${accessToken}`
+  };
+  const url = `https://api.spotify.com/v1/shows/${showId}/episodes?market=${market}`;
+  return this.http.get(url, { headers });
+}
+
+play(accessToken: string, body: any): Observable<any> {
+  const headers = {
+    'Authorization': `Bearer ${accessToken}`,
+    'Content-Type': 'application/json'
+  };
+
+  return this.http.put('https://api.spotify.com/v1/me/player/play', body, { headers });
+}
+
+pause(accessToken: string): Observable<any> {
+  const headers = { 'Authorization': `Bearer ${accessToken}` };
+
+  return this.http.put('https://api.spotify.com/v1/me/player/pause', {}, { headers });
+}
+
+skipToNext(accessToken: string): Observable<any> {
+  const headers = { 'Authorization': `Bearer ${accessToken}` };
+
+  return this.http.post('https://api.spotify.com/v1/me/player/next', {}, { headers });
+}
+
 }
