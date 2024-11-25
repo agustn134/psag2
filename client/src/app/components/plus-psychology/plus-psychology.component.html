@@ -1,113 +1,158 @@
-
 <div class="container mx-auto px-6 py-16">
   <!-- Contenido del podcast -->
   <div *ngIf="showDetails" class="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg text-center">
-    <img
-      [src]="showDetails.images[0]?.url"
-      [alt]="showDetails.name"
-      class="w-32 h-32 object-cover rounded-full mx-auto shadow-md mb-4"
-    />
-    <h3 class="text-xl font-semibold text-zinc-800 dark:text-white">
-      {{ showDetails.name }}
-    </h3>
-    <p class="text-sm text-zinc-600 dark:text-zinc-300 mt-2 mb-4">
-      {{ showDetails.description }}
-    </p>
-    <a
-      [href]="showDetails.external_urls.spotify"
-      target="_blank"
-      class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-6 rounded-lg shadow-md transition-all">
+    <!-- Información del podcast -->
+    <div class="flex justify-center items-center mb-8">
+      <img [src]="showDetails.images[0]?.url" [alt]="showDetails.name"
+        class="w-32 h-32 object-cover rounded-full shadow-md mr-6" />
+      <div class="text-left">
+        <h3 class="text-2xl font-semibold text-zinc-800 dark:text-white mb-2">
+          {{ showDetails.name }}
+        </h3>
+        <p class="text-sm text-zinc-600 dark:text-zinc-300">
+          {{ showDetails.description }}
+        </p>
+      </div>
+    </div>
+    <!-- Reproductor miniatura y progreso -->
+    <div class="audio-player flex items-center justify-center w-full h-24 bg-[#282828] rounded-lg p-4 mt-8">
+      <div class="album-cover w-[64px] h-[64px] bg-white rounded-full mr-3">
+        <img [src]="showDetails.images[0]?.url" [alt]="showDetails.name"
+          class="w-full h-full object-cover rounded-full" />
+      </div>
+      <div class="player-controls flex-grow flex flex-col">
+        <div class="song-info mb-1">
+          <div class="song-title text-white text-base m-0">{{ showDetails.name }}</div>
+          <p class="artist text-[#b3b3b3] text-sm m-0">Podcast</p>
+        </div>
+        <div class="progress-bar w-full h-[4px] bg-[#4f4f4f] rounded-[2px] overflow-hidden">
+          <div class="progress w-[50%] h-full bg-[#1db954] transform origin-left animate-progress"></div>
+        </div>
+        <div class="absolute bottom-4 left-0 w-full flex justify-between items-center px-6 text-white">
+          <p class="text-xs">1:31</p>
+          <p class="text-xs">3:46</p>
+        </div>
+        <div class="buttons flex mt-2">
+          <button
+            class="play-btn bg-none border-none cursor-pointer outline-none text-white text-base mr-2 transition-transform duration-200 ease-in-out hover:scale-110"
+            (click)="play()">
+            <svg viewBox="0 0 16 16" class="bi bi-play-fill" fill="currentColor" height="32" width="32"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill="white"
+                d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z">
+              </path>
+            </svg>
+          </button>
+
+          <button
+            class="pause-btn bg-none border-none cursor-pointer outline-none text-white text-base mr-2 transition-transform duration-200 ease-in-out hover:scale-110"
+            (click)="pause()">
+            <svg viewBox="0 0 16 16" class="bi bi-pause-fill" fill="currentColor" height="32" width="32"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill="white"
+                d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z">
+              </path>
+            </svg>
+          </button>
+
+          <button
+            class="pause-btn bg-none border-none cursor-pointer outline-none text-white text-base mr-2 transition-transform duration-200 ease-in-out hover:scale-110 border-spacing-1"
+            (click)="skipNext()">
+            <svg viewBox="0 0 16 16" class="bi bi-skip-forward" fill="currentColor" height="32" width="32"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill="white"
+                d="M6.495 3.205a.5.5 0 0 1 .715.057L9 5.084V4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-6a.5.5 0 0 1-.5-.5v-1.084l-1.79 1.822a.5.5 0 0 1-.73-.676l2.473-2.522-2.473-2.522a.5.5 0 0 1-.057-.715z">
+              </path>
+            </svg>
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Enlace para escuchar -->
+    <a [href]="showDetails.external_urls.spotify" target="_blank"
+      class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-6 rounded-lg shadow-md transition-all mt-8 inline-block">
       Escuchar en Spotify
     </a>
-    <!-- Controles del reproductor -->
-    <div class="text-center">
-      <h2 class="text-2xl font-bold text-zinc-800 dark:text-white mb-6">
-        Controles de Reproducción
-      </h2>
-      <div class="flex justify-center gap-4 mb-8">
-        <button
-          class="bg-green-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-all"
-          (click)="play()">
-          Reproducir
-        </button>
-        <button
-          class="bg-gray-200 text-white py-2 px-4 rounded hover:bg-red-600 transition-all"
-          (click)="pause()">
-          Pausar
-        </button>
-        <button
-          class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 transition-all"
-          (click)="skipNext()">
-          Siguiente
-        </button>
+
+    <style>
+      @keyframes progress-animation {
+        0% {
+          transform: scaleX(0);
+        }
+
+        100% {
+          transform: scaleX(1);
+        }
+      }
+      .animate-progress {
+        animation: progress-animation 13s linear infinite;
+      }
+    </style>
+
+  </div>
+</div>
+
+<!-- Lista de episodios -->
+<div class="mt-12">
+  <h3 class="text-lg font-semibold text-zinc-800 dark:text-white mb-6">
+    Episodios Destacados
+  </h3>
+  <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let episode of episodes"
+      class="w-72 h-40 flex flex-col justify-center gap-2 bg-neutral-50 dark:bg-zinc-800 rounded-lg shadow p-2">
+      <div class="flex gap-2">
+        <img class="bg-neutral-500 w-24 h-24 shrink-0 rounded-lg"
+          href="https://i.scdn.co/image/ab6765630000ba8a0f3e91281deda65ee0988c33" />
+        <div class="flex flex-col">
+          <span class="font-bold text-neutral-700 dark:text-white italic">{{ episode.name }}</span>
+          <p class="line-clamp-3 dark:text-zinc-300">
+            {{ episode.description }}
+          </p>
+        </div>
       </div>
+      <button href="episode.external_urls.spotify"
+        class="hover:bg-green-700 bg-green-600 font-bold text-neutral-50 rounded p-2">
+        Escuchar
+      </button>
+    </div>
+  </ul>
+</div>
+
+
+
+<!-- Categorías y listas de reproducción -->
+<div class="mt-12">
+  <h3 class="text-lg font-semibold text-zinc-800 dark:text-white mb-6">
+    Explora Categorías
+  </h3>
+  <div class="flex flex-wrap gap-6 justify-center">
+    <div *ngFor="let category of categories" (click)="loadPlaylists(category.id)" class="cursor-pointer text-center">
+      <img [src]="category.icons[0]?.url" [alt]="category.name"
+        class="w-20 h-20 object-cover rounded-full shadow-md mb-2" />
+      <p class="text-sm text-zinc-800 dark:text-white">{{ category.name }}</p>
     </div>
   </div>
 
-  <!-- Lista de episodios -->
-  <div class="mt-12">
-    <h3 class="text-lg font-semibold text-zinc-800 dark:text-white mb-6">
-      Episodios Destacados
-    </h3>
+  <div *ngIf="playlists.length" class="mt-8">
+    <h4 class="text-lg font-semibold text-zinc-800 dark:text-white mb-6">
+      Listas de Reproducción
+    </h4>
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <li *ngFor="let episode of episodes" class="bg-gray-100 dark:bg-zinc-700 p-4 rounded-lg shadow-lg">
-        <h4 class="font-medium text-zinc-800 dark:text-white mb-2">{{ episode.name }}</h4>
-        <p class="text-sm text-zinc-600 dark:text-zinc-300 mb-3">
-          {{ episode.description }}
-        </p>
-        <a
-          [href]="episode.external_urls.spotify"
-          target="_blank"
-          class="text-blue-500 dark:text-blue-400 hover:underline">
-          Escuchar
+      <li *ngFor="let playlist of playlists" class="bg-white dark:bg-zinc-800 rounded-lg shadow-md p-4">
+        <img [src]="playlist.images[0]?.url" [alt]="playlist.name" class="w-full h-40 object-cover rounded-lg mb-4" />
+        <a [href]="playlist.external_urls.spotify" target="_blank" class="text-green-500 hover:underline font-medium">
+          {{ playlist.name }}
         </a>
       </li>
     </ul>
   </div>
-
-  <!-- Categorías y listas de reproducción -->
-  <div class="mt-12">
-    <h3 class="text-lg font-semibold text-zinc-800 dark:text-white mb-6">
-      Explora Categorías
-    </h3>
-    <div class="flex flex-wrap gap-6 justify-center">
-      <div
-        *ngFor="let category of categories"
-        (click)="loadPlaylists(category.id)"
-        class="cursor-pointer text-center">
-        <img
-          [src]="category.icons[0]?.url"
-          [alt]="category.name"
-          class="w-20 h-20 object-cover rounded-full shadow-md mb-2"
-        />
-        <p class="text-sm text-zinc-800 dark:text-white">{{ category.name }}</p>
-      </div>
-    </div>
-
-    <div *ngIf="playlists.length" class="mt-8">
-      <h4 class="text-lg font-semibold text-zinc-800 dark:text-white mb-6">
-        Listas de Reproducción
-      </h4>
-      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <li
-          *ngFor="let playlist of playlists"
-          class="bg-white dark:bg-zinc-800 rounded-lg shadow-md p-4">
-          <img
-            [src]="playlist.images[0]?.url"
-            [alt]="playlist.name"
-            class="w-full h-40 object-cover rounded-lg mb-4"
-          />
-          <a
-            [href]="playlist.external_urls.spotify"
-            target="_blank"
-            class="text-green-500 hover:underline font-medium">
-            {{ playlist.name }}
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
 </div>
+
+
+
+
 
 
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
