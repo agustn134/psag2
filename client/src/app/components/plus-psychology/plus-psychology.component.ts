@@ -40,7 +40,7 @@ export class PlusPsychologyComponent implements OnInit {
     this.spotifyAuthService.getClientCredentialsToken().subscribe((tokenResponse: any) => {
       const accessToken = tokenResponse.access_token;
       this.spotifyService.getShow(accessToken, this.showId, this.market).subscribe((showData: any) => {
-        this.showDetails = showData; // Almacena los detalles del show
+        this.showDetails = showData;
         console.log('Detalles del show:', this.showDetails);
       });
     });
@@ -66,14 +66,33 @@ export class PlusPsychologyComponent implements OnInit {
   }
 
 
+  // play(): void {
+  //   const deviceId = localStorage.getItem('spotify_device_id');
+  //   const accessToken = localStorage.getItem('spotify_access_token');
+
+  //   if (deviceId && accessToken) {
+  //     const body = {
+  //       device_id: deviceId,
+  //       uris: ['spotify:track:6qxJcZgS7z2aBSwC4PNxVA']
+  //     };
+
+  //     this.spotifyService.play(accessToken, body).subscribe(() => {
+  //       console.log('Reproducción iniciada');
+  //     });
+  //   }
+  // }
+
   play(): void {
     const deviceId = localStorage.getItem('spotify_device_id');
     const accessToken = localStorage.getItem('spotify_access_token');
 
-    if (deviceId && accessToken) {
+    // Use the current episode's URI for playback
+    const trackUri = this.showDetails?.episodes[0]?.uri; // Adjust to the appropriate episode or track
+
+    if (deviceId && accessToken && trackUri) {
       const body = {
         device_id: deviceId,
-        uris: ['spotify:track:6qxJcZgS7z2aBSwC4PNxVA'] // Reemplaza <TRACK_ID> con el ID de la pista
+        uris: [trackUri]
       };
 
       this.spotifyService.play(accessToken, body).subscribe(() => {
@@ -81,6 +100,7 @@ export class PlusPsychologyComponent implements OnInit {
       });
     }
   }
+
 
   pause(): void {
     const accessToken = localStorage.getItem('spotify_access_token');

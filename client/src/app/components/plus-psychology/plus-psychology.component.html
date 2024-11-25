@@ -14,6 +14,9 @@
         </p>
       </div>
     </div>
+
+
+
     <!-- Reproductor miniatura y progreso -->
     <div class="audio-player flex items-center justify-center w-full h-24 bg-[#282828] rounded-lg p-4 mt-8">
       <div class="album-cover w-[64px] h-[64px] bg-white rounded-full mr-3">
@@ -65,10 +68,11 @@
               </path>
             </svg>
           </button>
-
         </div>
       </div>
     </div>
+
+
 
     <!-- Enlace para escuchar -->
     <a [href]="showDetails.external_urls.spotify" target="_blank"
@@ -90,35 +94,51 @@
         animation: progress-animation 13s linear infinite;
       }
     </style>
+  </div>
 
+
+  <!-- Lista de episodios -->
+  <div class="mt-12">
+    <h3 class="text-lg font-semibold text-zinc-800 dark:text-white mb-6">
+      Episodios Destacados
+    </h3>
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-start">
+      <div *ngFor="let episode of episodes" class="flex flex-col w-full">
+        <div class="flex flex-col justify-between bg-neutral-50 dark:bg-zinc-800 rounded-lg shadow p-4 h-full">
+          <!-- Imagen y nombre del episodio -->
+          <div class="flex gap-2">
+            <img [src]="episode.images[0]?.url" alt="Episode Image" class="w-16 h-16 rounded-full">
+            <div class="flex flex-col">
+              <span class="font-bold text-neutral-700 dark:text-white italic">{{ episode.name }}</span>
+              <!-- Descripción del episodio con truncamiento -->
+              <p class="line-clamp-3 dark:text-zinc-300">
+                {{ episode.description }}
+              </p>
+            </div>
+          </div>
+          <!-- Botón para escuchar -->
+          <a [href]="episode.external_urls.spotify" target="_blank"
+            class="hover:bg-green-700 bg-green-600 font-bold text-neutral-50 rounded p-2 mt-4">
+            Escuchar
+          </a>
+
+          <div class="bg-[#131212] p-2  rounded  mt-2">
+            <audio *ngIf="episode.audio_preview_url" [src]="episode.audio_preview_url" controls class="w-full mt-4 rounded-lg hover:bg-green-700 bg-green-600 p-2"></audio>
+            <div class="mt-4 text-white">
+              <p class="text-lg font-semibold">{{ episode.title }}</p>
+              <p class="text-sm text-gray-400">{{ episode.artist }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ul>
   </div>
 </div>
 
-<!-- Lista de episodios -->
-<div class="mt-12">
-  <h3 class="text-lg font-semibold text-zinc-800 dark:text-white mb-6">
-    Episodios Destacados
-  </h3>
-  <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div *ngFor="let episode of episodes"
-      class="w-72 h-40 flex flex-col justify-center gap-2 bg-neutral-50 dark:bg-zinc-800 rounded-lg shadow p-2">
-      <div class="flex gap-2">
-        <img class="bg-neutral-500 w-24 h-24 shrink-0 rounded-lg"
-          href="https://i.scdn.co/image/ab6765630000ba8a0f3e91281deda65ee0988c33" />
-        <div class="flex flex-col">
-          <span class="font-bold text-neutral-700 dark:text-white italic">{{ episode.name }}</span>
-          <p class="line-clamp-3 dark:text-zinc-300">
-            {{ episode.description }}
-          </p>
-        </div>
-      </div>
-      <button href="episode.external_urls.spotify"
-        class="hover:bg-green-700 bg-green-600 font-bold text-neutral-50 rounded p-2">
-        Escuchar
-      </button>
-    </div>
-  </ul>
-</div>
+
+
+
+
 
 
 
