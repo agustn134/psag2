@@ -10,7 +10,7 @@
 //         database: 'sql3746356',
 //         port: 3306 // Opcional si ya es el puerto predeterminado
 //     },
-//     jwtSecret: '1234567890'
+//     jwtSecret: '1234567890'dfgdfgfd
 
 // }
 
