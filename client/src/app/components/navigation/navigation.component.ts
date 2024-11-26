@@ -93,6 +93,7 @@ export class NavigationComponent implements OnInit {
   isLoggedIn: boolean = false;
   errorMessage: string = '';
   isLoggedInIdAdmin: boolean = false;
+  isLoggedInIdPsico: boolean = false;
   idRol: number | null = null;
 
   user: User = {
@@ -119,7 +120,7 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
     const userDetails = this.userService.getUserDetailsFromToken();
-    
+
     // Verifica si el usuario está logueado
     this.authService.currentStatus.subscribe((status) => {
       this.isLoggedIn = status;
@@ -136,12 +137,16 @@ export class NavigationComponent implements OnInit {
         );
       }
     });
-  
+
     this.authService.currentStatusId.subscribe((status) => {
       this.isLoggedInIdAdmin = status;
     });
+
+    this.authService.currentStatusIdPsico.subscribe((status) => {
+      this.isLoggedInIdPsico = status;
+    });
   }
-  
+
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;

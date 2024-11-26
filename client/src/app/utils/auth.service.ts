@@ -12,19 +12,22 @@ export class AuthService {
   private loggedInId = new BehaviorSubject<boolean>(this.checkIdStatus());
   currentStatusId = this.loggedInId.asObservable();
 
+  private loggedInIdPsico = new BehaviorSubject<boolean>(this.checkIdStatusPsico());
+  currentStatusIdPsico = this.loggedInIdPsico.asObservable();
+
   constructor() {}
 
   /**
    * Obtiene el token de la API.
    * @returns El token de la API si se encuentra en localStorage, o null si no existe.
-   *  
+   *
    * Decodificación manual del token JWT
    * Un JWT se compone de tres partes separadas por puntos (.):
    * Header (Encabezado)
    * Payload (Cuerpo, contiene los datos en Base64URL)
    * Signature (Firma)
    * El payload es lo que típicamente necesitas decodificar para obtener información como el id, rol, etc.
-   * 
+   *
    */
   private decodeJWT(token: string): any {
     try {
@@ -41,17 +44,6 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
-  // checkIdStatus(): boolean {
-  //   const token = localStorage.getItem('token');
-  //   if (!token) return false; // Si no hay token, retorna false
-    
-  //   const decodedToken = decode(token); // Decodifica el token
-  //   if (!decodedToken) return false;
-    
-  //   const userRole = decodedToken.payload['rol']; // Accede a 'rol' en vez de 'id_rol'
-  //   return userRole === 3; // Verifica si el rol es 3 (el rol de admin)
-  // }
-
   checkIdStatus(): boolean {
     const token = localStorage.getItem('token');
     if (!token) return false;
@@ -62,7 +54,17 @@ export class AuthService {
     const userRole = decodedToken['rol'];
     return userRole === 3; // Rol de admin
   }
-  
+
+  checkIdStatusPsico(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) return false;
+
+    const decodedToken = this.decodeJWT(token);
+    if (!decodedToken) return false;
+
+    const userRole = decodedToken['rol'];
+    return userRole === 2; // Rol de admin
+  }
 
   logIn(token: string) {
     localStorage.setItem('token', token);

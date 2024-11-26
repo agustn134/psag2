@@ -1,118 +1,3 @@
-<section class="relative w-full h-[400px]">
-  <img class="object-cover w-full h-full" alt="hero" src="https://i.ibb.co/HVJMvVq/dashboard1.jpg">
-  <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center">
-    <h1 class="text-white text-3xl md:text-5xl font-bold text-center">
-      Salud Mental y Equilibrio Emocional para Estudiantes
-    </h1>
-    <p class="text-white text-center mt-4 max-w-xl">
-      Cuidar de tu salud mental es clave para el éxito académico y personal. Te acompañamos en el desarrollo de habilidades emocionales para que vivas una experiencia universitaria más plena.
-    </p>
-  </div>
-</section>
-<div class="container flex flex-col items-center px-5 py-16 mx-auto md:flex-row lg:px-28">
-  <div class="flex flex-col items-start mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:mb-0">
-    <h2 class="mb-8 text-xs font-semibold tracking-widest text-black uppercase title-font"> Bienestar Universitario
-    </h2>
-    <h1 class="mb-8 text-2xl font-black tracking-tighter text-black md:text-5xl title-font"> Salud Mental y Equilibrio
-      Emocional para Estudiantes </h1>
-    <p class="mb-8 text-base leading-relaxed text-left text-blueGray-600"> Cuidar de tu salud mental es clave para el
-      éxito académico y personal. Te acompañamos en el desarrollo de habilidades emocionales y te ofrecemos recursos
-      para que vivas una experiencia universitaria más plena. </p>
-    <div class="flex flex-col justify-center lg:flex-row">
-      <button
-        class="flex items-center px-6 py-2 mt-auto font-semibold text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-lg hover:bg-blue-700 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2">
-        Explorar Recursos </button>
-      <p class="mt-2 text-sm text-left text-blueGray-600 md:ml-6 md:mt-0"> Encuentra artículos y guías prácticas. <br
-          class="hidden lg:block">
-        <a href="#" class="inline-flex items-center font-semibold text-blue-600 md:mb-2 lg:mb-0 hover:text-black "
-          title="read more"> Más información » </a>
-
-      </p>
-    </div>
-  </div>
-
-  <div class="w-full lg:max-w-lg md:w-1/2">
-    <div class="max-w-md mx-auto bg-white dark:bg-zinc-900 shadow-lg rounded-xl overflow-hidden">
-      <div class="flex flex-col h-full sm:h-[600px]">
-
-        <!-- Header del chat -->
-        <div class="px-6 py-4 border-b border-zinc-200 dark:border-zinc-700">
-          <div class="flex justify-between items-center">
-            <h2 class="text-xl font-bold text-zinc-900 dark:text-white">
-              Psicólogo Virtual
-            </h2>
-            <div class="flex items-center space-x-2">
-              <span class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Estado</span>
-              <span class="bg-green-500 text-white text-xs px-3 py-1 rounded-full">Online</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cuerpo del chat donde se muestran los mensajes -->
-        <div class="flex-1 p-6 overflow-y-auto" id="chatDisplay">
-          <!-- Imagen del usuario -->
-
-          <div
-            class="chat-message self-end bg-blue-500 text-white max-w-xs sm:max-w-md rounded-lg px-4 py-2 text-base mb-2 text-right">
-            Hola!, últimamente he tenido problemas, podrías darme un consejo?
-          </div>
-
-          <div class="chat-message self-start bg-zinc-600 text-white max-w-xs sm:max-w-md rounded-lg px-4 py-2 text-base mb-2">
-            Hola!, soy tu asistente aguila y me gustaría ayudarte con tus problemas.
-          </div>
-          <div *ngFor="let message of chatMessages" class="flex items-start mb-2">
-            <!-- Imagen del asistente -->
-            <img *ngIf="!message.isUser"
-                 src="https://i.ibb.co/d6hgy3b/LOGO.jpg"
-                 alt="Assistant Avatar"
-                 class="w-8 h-8 rounded-full mr-2" />
-
-            <!-- Mensaje del asistente -->
-            <div *ngIf="!message.isUser"
-                 class="chat-message self-start bg-zinc-600 text-white max-w-xs sm:max-w-md rounded-lg px-4 py-2 text-base">
-              {{message.text}}
-            </div>
-
-            <!-- Mensaje del usuario y su imagen -->
-            <div *ngIf="message.isUser" class="flex items-center ml-auto mb-2">
-              <div class="chat-message self-end bg-blue-500 text-white max-w-xs sm:max-w-md rounded-lg px-4 py-2 text-base text-right">
-                {{message.text}}
-              </div>
-
-              <!-- Imagen del usuario -->
-              <img *ngIf="user.imagen_url; else defaultImage"
-                   [src]="user.imagen_url"
-                   alt="User Avatar"
-                   class="w-8 h-8 rounded-full ml-2" />
-            </div>
-
-            <ng-template #defaultImage>
-              <img class="h-8 w-8 rounded-full ml-2"
-                   src="https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png"
-                   alt="Imagen de usuario por defecto" />
-            </ng-template>
-          </div>
-
-
-        </div>
-        <!-- Input y botón para enviar mensajes -->
-        <div class="px-2 py-3 border-t border-zinc-200 dark:border-zinc-700">
-          <div class="flex items-center space-x-1">
-            <input [(ngModel)]="userMessage" (keydown)="handleKeydown($event)" placeholder="Escribir un mensaje..."
-                   class="flex-1 p-3 rounded-full border border-zinc-300 dark:bg-zinc-800 dark:text-white dark:border-zinc-600 focus:outline-none text-sm transition-all duration-300 ease-in-out"
-                   id="chatInput" type="text" style="flex-shrink: 1;" />
-
-            <button (click)="sendMessage()"
-                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-2 rounded-full transition duration-300 ease-in-out text-xm"
-                    style="flex-shrink: 0;">
-              Enviar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
 
 
 
@@ -264,3 +149,156 @@
     </div>
   </div>
 </section> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="relative w-full h-[400px]">
+  <img class="object-cover w-full h-full" alt="hero" src="https://i.ibb.co/HVJMvVq/dashboard1.jpg">
+  <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center">
+    <h1 class="text-white text-3xl md:text-5xl font-bold text-center">
+      Salud Mental y Equilibrio Emocional para Estudiantes
+    </h1>
+    <p class="text-white text-center mt-4 max-w-xl">
+      Cuidar de tu salud mental es clave para el éxito académico y personal. Te acompañamos en el desarrollo de
+      habilidades emocionales para que vivas una experiencia universitaria más plena.
+    </p>
+  </div>
+</section>
+<div class="container flex flex-col items-center px-5 py-16 mx-auto md:flex-row lg:px-28">
+  <div class="flex flex-col items-start mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:mb-0">
+    <h2 class="mb-8 text-xs font-semibold tracking-widest text-black uppercase title-font"> Bienestar Universitario
+    </h2>
+    <h1 class="mb-8 text-2xl font-black tracking-tighter text-black md:text-5xl title-font"> Salud Mental y Equilibrio
+      Emocional para Estudiantes </h1>
+    <p class="mb-8 text-base leading-relaxed text-left text-blueGray-600"> Cuidar de tu salud mental es clave para el
+      éxito académico y personal. Te acompañamos en el desarrollo de habilidades emocionales y te ofrecemos recursos
+      para que vivas una experiencia universitaria más plena. </p>
+    <div class="flex flex-col justify-center lg:flex-row">
+      <button
+        class="flex items-center px-6 py-2 mt-auto font-semibold text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-lg hover:bg-blue-700 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2">
+        Explorar Recursos </button>
+      <p class="mt-2 text-sm text-left text-blueGray-600 md:ml-6 md:mt-0"> Encuentra artículos y guías prácticas. <br
+          class="hidden lg:block">
+        <a href="#" class="inline-flex items-center font-semibold text-blue-600 md:mb-2 lg:mb-0 hover:text-black "
+          title="read more"> Más información » </a>
+
+      </p>
+    </div>
+  </div>
+  <div class="w-full lg:max-w-lg md:w-1/2">
+    <div class="max-w-md mx-auto bg-white dark:bg-zinc-900 shadow-lg rounded-xl overflow-hidden">
+      <div class="flex flex-col h-full sm:h-[600px]">
+
+        <!-- Header del chat -->
+        <div class="px-6 py-4 border-b border-zinc-200 dark:border-zinc-700">
+          <div class="flex justify-between items-center">
+            <h2 class="text-xl font-bold text-zinc-900 dark:text-white">
+              Psicólogo Virtual
+            </h2>
+            <div class="flex items-center space-x-2">
+              <span class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Estado</span>
+              <span class="bg-green-500 text-white text-xs px-3 py-1 rounded-full">Online</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cuerpo del chat donde se muestran los mensajes de prueba -->
+        <div class="flex-1 p-6 overflow-y-auto" id="chatDisplay" #chatDisplay>
+          <div class="flex flex-col space-y-4 max-w-lg mx-auto p-4">
+            <!-- Mensaje del Usuario -->
+            <div class="flex items-start justify-end mb-2">
+              <div
+                class="chat-message self-end bg-blue-500 text-white max-w-xs sm:max-w-md rounded-lg px-4 py-2 text-base text-right">
+                Hola!, últimamente he tenido problemas, ¿podrías darme un consejo?
+              </div>
+              <img *ngIf="user.imagen_url; else defaultImage" [src]="user.imagen_url" alt="User Avatar"
+                class="w-8 h-8 rounded-full ml-2" />
+              <ng-template #defaultImage>
+                <img class="h-8 w-8 rounded-full ml-2" src="https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png"
+                  alt="Imagen de usuario por defecto" />
+              </ng-template>
+
+            </div>
+
+            <!-- Mensaje del Asistente -->
+            <div class="flex items-start mb-2">
+              <img src="https://i.ibb.co/d6hgy3b/LOGO.jpg" alt="Assistant Avatar" class="w-8 h-8 rounded-full mr-2" />
+              <div
+                class="chat-message bg-zinc-600 text-white max-w-xs sm:max-w-md rounded-lg px-4 py-2 text-base text-left">
+                Hola!, soy tu asistente águila y me gustaría ayudarte con tus problemas.
+              </div>
+            </div>
+          </div>
+
+          <div *ngFor="let message of chatMessages" class="flex items-start mb-2">
+
+            <!-- Imagen del asistente -->
+            <img *ngIf="!message.isUser" src="https://i.ibb.co/d6hgy3b/LOGO.jpg" alt="Assistant Avatar"
+              class="w-8 h-8 rounded-full mr-2" />
+
+            <!-- Mensaje del asistente -->
+            <div *ngIf="!message.isUser"
+              class="chat-message self-start bg-zinc-600 text-white max-w-xs sm:max-w-md rounded-lg px-4 py-2 text-base">
+              {{message.text}}
+            </div>
+
+            <!-- Mensaje del usuario y su imagen -->
+            <div *ngIf="message.isUser" class="flex items-center ml-auto mb-2">
+              <div
+                class="chat-message self-end bg-blue-500 text-white max-w-xs sm:max-w-md rounded-lg px-4 py-2 text-base text-right">
+                {{message.text}}
+              </div>
+
+              <!-- Imagen del usuario -->
+              <img *ngIf="user.imagen_url; else defaultImage" [src]="user.imagen_url" alt="User Avatar"
+                class="w-8 h-8 rounded-full ml-2" />
+            </div>
+
+            <ng-template #defaultImage>
+              <img class="h-8 w-8 rounded-full ml-2"
+                src="https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png"
+                alt="Imagen de usuario por defecto" />
+            </ng-template>
+          </div>
+
+
+        </div>
+
+        <div *ngIf="isLoading" class="flex justify-center items-center mt-4">
+          <div class="flex items-center space-x-2">
+            <div class="loader-dot bg-blue-500 w-2 h-2 rounded-full animate-bounce"></div>
+            <div class="loader-dot bg-blue-500 w-2 h-2 rounded-full animate-bounce delay-150"></div>
+            <div class="loader-dot bg-blue-500 w-2 h-2 rounded-full animate-bounce delay-300"></div>
+          </div>
+        </div>
+
+        <!-- Input y botón para enviar mensajes -->
+        <div class="px-2 py-3 border-t border-zinc-200 dark:border-zinc-700">
+          <div class="flex items-center space-x-1">
+            <input [(ngModel)]="userMessage" (keydown)="handleKeydown($event)" placeholder="Escribir un mensaje..."
+              class="flex-1 p-3 rounded-full border border-zinc-300 dark:bg-zinc-800 dark:text-white dark:border-zinc-600 focus:outline-none text-sm transition-all duration-300 ease-in-out"
+              id="chatInput" type="text" style="flex-shrink: 1;" />
+
+            <button (click)="sendMessage()"
+              class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-2 rounded-full transition duration-300 ease-in-out text-xm"
+              style="flex-shrink: 0;">
+              Enviar
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
