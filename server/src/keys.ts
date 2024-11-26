@@ -17,9 +17,9 @@
 export default {
     database: {
       host: process.env.DB_HOST || 'sql5.freesqldatabase.com',
-      user: process.env.DB_USER || 'sql5747655',
-      password: process.env.DB_PASSWORD || '7ZE4ZbGWph',
-      database: process.env.DB_NAME || 'sql5747655',
+      user: process.env.DB_USER || 'sql3747694',
+      password: process.env.DB_PASSWORD || 'uJ2kZM3AcR',
+      database: process.env.DB_NAME || 'sql3747694',
       port: parseInt(process.env.DB_PORT || '3306', 10),
     },
     jwtSecret: process.env.JWT_SECRET || '1234567890',
