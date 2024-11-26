@@ -16,10 +16,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // }
 exports.default = {
     database: {
-        host: process.env.DB_HOST || 'localhost',
-        user: process.env.DB_USER || 'root',
-        password: process.env.DB_PASSWORD || '',
-        database: process.env.DB_NAME || 'bd_psga6',
+        host: process.env.DB_HOST || 'sql5.freesqldatabase.com',
+        user: process.env.DB_USER || 'sql5747655',
+        password: process.env.DB_PASSWORD || '7ZE4ZbGWph',
+        database: process.env.DB_NAME || 'sql5747655',
         port: parseInt(process.env.DB_PORT || '3306', 10),
     },
     jwtSecret: process.env.JWT_SECRET || '1234567890',
