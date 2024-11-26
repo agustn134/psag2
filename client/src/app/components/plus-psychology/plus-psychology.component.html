@@ -1,7 +1,5 @@
-<div class="container mx-auto px-6 py-16">
-  <!-- Contenido del podcast -->
+<div class="container mx-auto px-6 py-16">y
   <div *ngIf="showDetails" class="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg text-center">
-    <!-- Información del podcast -->
     <div class="flex justify-center items-center mb-8">
       <img [src]="showDetails.images[0]?.url" [alt]="showDetails.name"
         class="w-32 h-32 object-cover rounded-full shadow-md mr-6" />
@@ -15,9 +13,6 @@
       </div>
     </div>
 
-
-
-    <!-- Reproductor miniatura y progreso -->
     <div class="audio-player flex items-center justify-center w-full h-24 bg-[#282828] rounded-lg p-4 mt-8">
       <div class="album-cover w-[64px] h-[64px] bg-white rounded-full mr-3">
         <img [src]="showDetails.images[0]?.url" [alt]="showDetails.name"
@@ -72,32 +67,20 @@
       </div>
     </div>
 
-
-
-    <!-- Enlace para escuchar -->
     <a [href]="showDetails.external_urls.spotify" target="_blank"
       class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-6 rounded-lg shadow-md transition-all mt-8 inline-block">
-      Escuchar en Spotify
+      Escuchar
     </a>
 
     <style>
       @keyframes progress-animation {
-        0% {
-          transform: scaleX(0);
-        }
-
-        100% {
-          transform: scaleX(1);
-        }
+        0% { transform: scaleX(0); }
+        100% { transform: scaleX(1); }
       }
-      .animate-progress {
-        animation: progress-animation 13s linear infinite;
-      }
+      .animate-progress { animation: progress-animation 13s linear infinite; }
     </style>
   </div>
 
-
-  <!-- Lista de episodios -->
   <div class="mt-12">
     <h3 class="text-lg font-semibold text-zinc-800 dark:text-white mb-6">
       Episodios Destacados
@@ -105,23 +88,19 @@
     <ul class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-start">
       <div *ngFor="let episode of episodes" class="flex flex-col w-full">
         <div class="flex flex-col justify-between bg-neutral-50 dark:bg-zinc-800 rounded-lg shadow p-4 h-full">
-          <!-- Imagen y nombre del episodio -->
           <div class="flex gap-2">
             <img [src]="episode.images[0]?.url" alt="Episode Image" class="w-16 h-16 rounded-full">
             <div class="flex flex-col">
               <span class="font-bold text-neutral-700 dark:text-white italic">{{ episode.name }}</span>
-              <!-- Descripción del episodio con truncamiento -->
               <p class="line-clamp-3 dark:text-zinc-300">
                 {{ episode.description }}
               </p>
             </div>
           </div>
-          <!-- Botón para escuchar -->
-          <a [href]="episode.external_urls.spotify" target="_blank"
+          <a (click)="playEpisode(episode.uri)" target="_blank"
             class="hover:bg-green-700 bg-green-600 font-bold text-neutral-50 rounded p-2 mt-4">
             Escuchar
           </a>
-
           <div class="bg-[#131212] p-2  rounded  mt-2">
             <audio *ngIf="episode.audio_preview_url" [src]="episode.audio_preview_url" controls class="w-full mt-4 rounded-lg hover:bg-green-700 bg-green-600 p-2"></audio>
             <div class="mt-4 text-white">
@@ -134,45 +113,5 @@
     </ul>
   </div>
 </div>
-
-
-
-
-
-
-
-
-<!-- Categorías y listas de reproducción -->
-<div class="mt-12">
-  <h3 class="text-lg font-semibold text-zinc-800 dark:text-white mb-6">
-    Explora Categorías
-  </h3>
-  <div class="flex flex-wrap gap-6 justify-center">
-    <div *ngFor="let category of categories" (click)="loadPlaylists(category.id)" class="cursor-pointer text-center">
-      <img [src]="category.icons[0]?.url" [alt]="category.name"
-        class="w-20 h-20 object-cover rounded-full shadow-md mb-2" />
-      <p class="text-sm text-zinc-800 dark:text-white">{{ category.name }}</p>
-    </div>
-  </div>
-
-  <div *ngIf="playlists.length" class="mt-8">
-    <h4 class="text-lg font-semibold text-zinc-800 dark:text-white mb-6">
-      Listas de Reproducción
-    </h4>
-    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <li *ngFor="let playlist of playlists" class="bg-white dark:bg-zinc-800 rounded-lg shadow-md p-4">
-        <img [src]="playlist.images[0]?.url" [alt]="playlist.name" class="w-full h-40 object-cover rounded-lg mb-4" />
-        <a [href]="playlist.external_urls.spotify" target="_blank" class="text-green-500 hover:underline font-medium">
-          {{ playlist.name }}
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
-
-
-
-
-
 
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
