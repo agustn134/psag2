@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class SpotifyAuthService {
   private clientId = 'cee7409563be42d9bc1585a608bf1bf1'; // Tu Client ID
   private clientSecret = 'b57892cfd87c4fc183dc033740dc4dc1'; // Tu Client Secret
-  private redirectUri = 'https://localhost/callback'; // Asegúrate de que esté registrado en Spotify Dev
+  private redirectUri = 'https://psicoaguilasedu.web.app/callback'; // Asegúrate de que esté registrado en Spotify Dev
   private authEndpoint = 'https://accounts.spotify.com/authorize';
   private tokenEndpoint = 'https://accounts.spotify.com/api/token';
   private scope = 'user-read-private user-read-email user-library-read streaming user-modify-playback-state';

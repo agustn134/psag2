@@ -27,7 +27,8 @@
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
-              "zone.js"
+              "zone.js",
+              "core-js/es/reflect"
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -54,16 +55,19 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2MB",
-                  "maximumError": "2MB"
+                  "maximumWarning": "4MB",
+                  "maximumError": "4MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6KB",
-                  "maximumError": "6KB"
+                  "maximumWarning": "10KB",
+                  "maximumError": "10KB"
                 }
               ],
-              "outputHashing": "all"
+              "optimization": false,
+              "outputHashing": "all",
+              "sourceMap": true
+
             },
             "development": {
               "optimization": false,

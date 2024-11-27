@@ -26,6 +26,7 @@
     "@paypal/paypal-js": "^8.1.2",
     "@types/leaflet": "^1.9.12",
     "@types/leaflet-routing-machine": "^3.2.8",
+    "core-js": "^3.39.0",
     "crypto-browserify": "^3.12.1",
     "leaflet": "^1.7.1",
     "leaflet-routing-machine": "^3.2.12",
