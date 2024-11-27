@@ -206,9 +206,9 @@ import { Userlog } from '../models/userlog'; // Importa la interfaz para el logi
   providedIn: 'root',
 })
 export class UserService {
-  // private apiUrl = 'http://localhost:3000/api'; // URL base de tu API
+  private apiUrl = 'http://localhost:3000/api'; // URL base de tu API
 // API_URI = 'http://localhost:3000/api';
-apiUrl = 'https://psag2.onrender.com/api';
+// apiUrl = 'https://psag2.onrender.com/api';
   constructor(private http: HttpClient) {}
 
   /**

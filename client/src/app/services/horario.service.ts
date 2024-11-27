@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HorarioService {
-  // API_URI = 'http://localhost:3000/api';
-  API_URI = 'https://psag2.onrender.com/api';
+  API_URI = 'http://localhost:3000/api';
+  // API_URI = 'https://psag2.onrender.com/api';
   constructor(private http: HttpClient) { }
 
   // Tipar la respuesta como Observable de Consultorio[]
