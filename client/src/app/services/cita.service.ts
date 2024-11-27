@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CitaService {
-  API_URI = 'http://localhost:3000/api';
+  API_URI = 'https://psag2.onrender.com';
 
   constructor(private http: HttpClient) {}
 

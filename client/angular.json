@@ -43,6 +43,7 @@
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
+              "crypto",
               "jwt-js-decode",
               "leaflet",
               "leaflet-routing-machine"
@@ -62,17 +63,12 @@
                   "maximumError": "6KB"
                 }
               ],
-              "outputHashing": "all",
-              "optimization": true,
-              "extractLicenses": true,
-              "sourceMap": false
-
+              "outputHashing": "all"
             },
             "development": {
               "optimization": true,
-              "extractLicenses": true,
+              "extractLicenses": false,
               "sourceMap": false
-
             }
           },
           "defaultConfiguration": "production"
@@ -107,8 +103,7 @@
               }
             ],
             "styles": [
-              "src/styles.css",
-               "node_modules/ngx-toastr/toastr.css"
+              "src/styles.css"
             ],
             "scripts": []
           }
