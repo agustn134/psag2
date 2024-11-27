@@ -1,9 +1,17 @@
 export default{
     database:{
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'bd_psga6'
+
+        host: 'database-psag.c58swme6copi.us-east-2.rds.amazonaws.com', // Dirección de tu RDS
+    user: 'admin',                                                  // Usuario de la base de datos
+    password: 'PsicoAguila2024',                                    // Contraseña de la base de datos
+    database: 'PSAG_6',                                             // Nombre correcto de la base de datos
+    port: 3306                                                      // Puerto predeterminado de MySQL
+
+
+        // host: 'database-psag.c58swme6copi.us-east-2.rds.amazonaws.com',
+        // user: 'admin',
+        // password: 'PsicoAguila2024',
+        // database: 'database-psag'
         // host: 'sql3.freesqldatabase.com',
         // user: 'sql3746356',
         // password: 'Eb42zTrQXh',
