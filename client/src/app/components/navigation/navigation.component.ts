@@ -80,7 +80,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../utils/auth.service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
-import { SpotifyAuthService } from '../../services/spotify-auth.service';
+import { SpotifyService } from '../../services/spotify.service';
 
 @Component({
   selector: 'app-navigation',
@@ -115,7 +115,7 @@ export class NavigationComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private userService: UserService,
-    private spotifyAuthService: SpotifyAuthService
+    private spotifyService: SpotifyService
   ) {}
 
   ngOnInit() {
@@ -166,6 +166,6 @@ export class NavigationComponent implements OnInit {
   }
 
   login() {
-    this.spotifyAuthService.login(); // Inicia el proceso de autenticación
+    this.spotifyService.checkTokenSpoLogin(); // Inicia el proceso de autenticación
   }
 }

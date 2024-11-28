@@ -148,12 +148,22 @@
       </a>
 
       <a *ngIf="isLoggedIn" (click)="selectMenuItem()" routerLink="/citas/add"  class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+        Agendar Cita
+      </a>
+
+      <a *ngIf="isLoggedIn" (click)="selectMenuItem()" routerLink="/citas"  class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
         Cita
       </a>
 
-      <a *ngIf="isLoggedIn" (click)="selectMenuItem()" (click)=" login()"  class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+      <a  (click)="selectMenuItem()" (click)=" login()"  class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
         + Psychology
       </a>
+
+      <a *ngIf=" isLoggedIn && isLoggedInIdPsico && isLoggedInIdAdmin"  (click)="selectMenuItem()"   routerLink="/conference" (click)=" login()"  class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+        Videollamada
+      </a>
+
+
 
       <a *ngIf="isLoggedIn && isLoggedInIdAdmin" (click)="selectMenuItem()" routerLink="/profile/add-profiles" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
         Añadir Perfiles

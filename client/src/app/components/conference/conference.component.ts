@@ -87,7 +87,188 @@ export class ConferenceComponent implements OnInit {
   }
 }
  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { Component, OnInit, OnDestroy } from '@angular/core';
+// import DailyIframe from '@daily-co/daily-js';
+
+// @Component({
+//   selector: 'app-conference',
+//   templateUrl: './conference.component.html',
+//   styleUrls: ['./conference.component.css'],
+// })
+// export class ConferenceComponent implements OnInit, OnDestroy {
+//   callFrame: any | null = null;
+
+//   // URL de la sala en Daily.co
+//   roomUrl: string = 'https://4200videocall.daily.co/room-conf';
+
+//   constructor() {}
+
+//   ngOnInit(): void {
+//     this.initializeCall();
+//   }
+
+//   initializeCall(): void {
+//     const callContainer = document.getElementById('call-container');
+//     if (!callContainer) {
+//       console.error('No se encontró el contenedor de la llamada.');
+//       return;
+//     }
+
+//     try {
+//       // Crear el frame de la llamada dentro del contenedor
+//       this.callFrame = DailyIframe.createFrame(callContainer, {
+//         iframeStyle: {
+//           width: '100%',
+//           height: '100%',
+//           border: '0',
+//         },
+//       });
+
+//       // Unirse a la sala
+//       this.callFrame
+//         .join({ url: this.roomUrl })
+//         .then(() => console.log('Unido a la llamada'))
+//         .catch((error: any) =>
+//           console.error('Error al unirse a la llamada:', error)
+//         );
+//     } catch (error) {
+//       console.error('Error al inicializar la llamada:', error);
+//     }
+//   }
+
+//   leaveCall(): void {
+//     if (!this.callFrame) {
+//       console.warn('No hay una llamada activa para salir.');
+//       return;
+//     }
+
+//     this.callFrame
+//       .leave()
+//       .then(() => {
+//         console.log('Saliste de la llamada');
+//         this.callFrame.destroy();
+//         this.callFrame = null; // Limpieza
+//       })
+//       .catch((error: any) =>
+//         console.error('Error al salir de la llamada:', error)
+//       );
+//   }
+
+//   ngOnDestroy(): void {
+//     if (this.callFrame) {
+//       this.callFrame.leave().finally(() => {
+//         this.callFrame.destroy();
+//         this.callFrame = null;
+//       });
+//     }
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router'; // Importar el servicio Router
 import DailyIframe from '@daily-co/daily-js';
 
 @Component({
@@ -97,11 +278,9 @@ import DailyIframe from '@daily-co/daily-js';
 })
 export class ConferenceComponent implements OnInit, OnDestroy {
   callFrame: any | null = null;
-
-  // URL de la sala en Daily.co
   roomUrl: string = 'https://4200videocall.daily.co/room-conf';
 
-  constructor() {}
+  constructor(private router: Router) {} // Inyectar el servicio Router
 
   ngOnInit(): void {
     this.initializeCall();
@@ -115,7 +294,6 @@ export class ConferenceComponent implements OnInit, OnDestroy {
     }
 
     try {
-      // Crear el frame de la llamada dentro del contenedor
       this.callFrame = DailyIframe.createFrame(callContainer, {
         iframeStyle: {
           width: '100%',
@@ -124,7 +302,6 @@ export class ConferenceComponent implements OnInit, OnDestroy {
         },
       });
 
-      // Unirse a la sala
       this.callFrame
         .join({ url: this.roomUrl })
         .then(() => console.log('Unido a la llamada'))
@@ -139,6 +316,7 @@ export class ConferenceComponent implements OnInit, OnDestroy {
   leaveCall(): void {
     if (!this.callFrame) {
       console.warn('No hay una llamada activa para salir.');
+      this.redirectToDashboard(); // Redirigir incluso si no hay llamada activa
       return;
     }
 
@@ -148,10 +326,16 @@ export class ConferenceComponent implements OnInit, OnDestroy {
         console.log('Saliste de la llamada');
         this.callFrame.destroy();
         this.callFrame = null; // Limpieza
+        this.redirectToDashboard(); // Redirigir después de salir
       })
-      .catch((error: any) =>
-        console.error('Error al salir de la llamada:', error)
-      );
+      .catch((error: any) => {
+        console.error('Error al salir de la llamada:', error);
+        this.redirectToDashboard(); // Intentar redirigir incluso si hay un error
+      });
+  }
+
+  redirectToDashboard(): void {
+    this.router.navigate(['home/dashboard']); // Redirigir al componente Dashboard
   }
 
   ngOnDestroy(): void {

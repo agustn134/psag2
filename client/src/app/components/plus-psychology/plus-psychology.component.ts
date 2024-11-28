@@ -15,7 +15,7 @@
 //   private market = 'ES';
 
 //   constructor(
-//     private spotifyAuthService: SpotifyAuthService,
+
 //     private spotifyService: SpotifyService
 //   ) { }
 
@@ -139,6 +139,79 @@
 // }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
 
@@ -151,7 +224,7 @@ export class PlusPsychologyComponent implements OnInit {
   showDetails: any;
   episodes: any[] = [];
 
-  private showId = '6wF969GfLUfypoKaicH5gr';
+  private showId = '0sGGLIDnnijRPLef7InllD';
   private market = 'ES';
 
   constructor(
@@ -161,36 +234,37 @@ export class PlusPsychologyComponent implements OnInit {
   ngOnInit(): void {
     this.loadShow();
     this.loadEpisodes();
+
   }
 
-  // Cargar detalles del show
   loadShow(): void {
-    this.spotifyService.getShow(this.showId, this.market).subscribe({
+    this.spotifyService.getShow(this.showId).subscribe({
       next: (showData: any) => this.showDetails = showData,
       error: (err) => console.error('Error al cargar los detalles del show:', err)
     });
   }
 
-  // Cargar episodios del show
   loadEpisodes(): void {
+    // Asegúrate de que `getEpisodes` esté implementado en `SpotifyService`
     this.spotifyService.getEpisodes(this.showId, this.market).subscribe({
-      next: (episodeData: any) => this.episodes = episodeData.items,
-      error: (err) => console.error('Error al cargar episodios:', err)
+      next: (episodeData: any) => {
+        this.episodes = episodeData.items;
+      },
+      error: (err) => console.error('Error al cargar los episodios:', err)
     });
   }
 
-  // Reproducir un track
   play(): void {
     const deviceId = localStorage.getItem('spotify_device_id');
-    const accessToken = localStorage.getItem('spotify_access_token');
+    const accessToken = sessionStorage.getItem('token');
 
     if (deviceId && accessToken) {
-      this.spotifyService.setActiveDevice(deviceId).subscribe(() => {
+      this.spotifyService.setActiveDevice(deviceId, accessToken).subscribe(() => {
         const body = {
           uris: ['spotify:track:3jRUDbIgoYdvPGwWsI7b7Y']
         };
 
-        this.spotifyService.play(body).subscribe(
+        this.spotifyService.play(accessToken, body).subscribe(
           () => {
             console.log('Reproducción iniciada');
           },
@@ -200,44 +274,81 @@ export class PlusPsychologyComponent implements OnInit {
         );
       });
     } else {
-      console.error('Faltan device_id o access_token en localStorage');
+      console.error('Faltan device_id o access_token en sessionStorage/localStorage');
     }
   }
 
-  // Reproducir episodio
+
   playEpisode(episodeUri: string): void {
     const deviceId = localStorage.getItem('spotify_device_id');
-    const accessToken = localStorage.getItem('spotify_access_token');
+    const accessToken = sessionStorage.getItem('token');
 
-    if (deviceId && accessToken && episodeUri) {
+    if (deviceId && accessToken) {
       const body = {
-        device_id: deviceId,
         uris: [episodeUri]
       };
 
-      this.spotifyService.play(body).subscribe(() => {
+      this.spotifyService.play(accessToken, body).subscribe(() => {
         console.log(`Reproduciendo episodio: ${episodeUri}`);
+      }, (error) => {
+        console.error('Error al reproducir el episodio:', error);
       });
+    } else {
+      console.error('Faltan datos necesarios para reproducir el episodio.');
     }
   }
 
-  // Pausar la reproducción
+
+
+
   pause(): void {
-    const accessToken = localStorage.getItem('spotify_access_token');
+    const accessToken = sessionStorage.getItem('token');
     if (accessToken) {
-      this.spotifyService.pause().subscribe(() => {
+      this.spotifyService.pause(accessToken).subscribe(() => {
         console.log('Reproducción pausada');
       });
     }
   }
 
-  // Saltar a la siguiente pista
   skipNext(): void {
-    const accessToken = localStorage.getItem('spotify_access_token');
+    const accessToken = sessionStorage.getItem('token');
     if (accessToken) {
-      this.spotifyService.skipToNext().subscribe(() => {
+      this.spotifyService.skipToNext(accessToken).subscribe(() => {
         console.log('Siguiente pista');
       });
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
